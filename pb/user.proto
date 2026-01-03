@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package user;
+option go_package = "github.com/ducthangng/geofleet/pb/user";
+
+service UserService {
+    // 1. Unary: call and receive
+    rpc CheckDuplicatedPhone(PhoneDuplicationCheckRequest) returns (PhoneDuplicationCheckResponse);
+
+    // 1. Unary: call and receive
+    rpc CreateUserProfile(UserCreationRequest) returns (UserCreationResponse);
+
+    // 1. Unary: call and receive
+    rpc Login(UserLoginRequest) returns (UserResponse);
+
+    // 1. Unary: call and receive
+    rpc GetUserProfile(UserInfoRequest) returns (UserResponse);
+
+    // 2. Server streaming: send a number of data for tracking current rides happening in the service
+    rpc TrackMultipleRides(TrackRidesRequest) returns (stream RideLocation);
+    
+    // 3. Client Streaming: Gửi một loạt tọa độ GPS để lưu lịch sử di chuyển
+    rpc UploadLocationHistory(stream LocationData) returns (UploadStatus);
+}
+
+message PhoneDuplicationCheckRequest {
+    string phone = 1;
+}
+
+message PhoneDuplicationCheckResponse {
+    int32 isDuplicated = 1; // 0 - 1
+}
+
+message UserLoginRequest {
+    string phone = 1;
+    string password = 2;
+}
+
+message UserCreationRequest {
+    string fullname = 1;
+    string email = 2;
+    string phone = 3;
+    string password = 4;
+    string address = 5;
+    string bod = 6;
+    double score = 7;
+}
+
+message UserCreationResponse {
+    int32 isDuplicated = 1; // 0 - 1
+}
+
+message UserInfoRequest {
+    string user_id = 1;
+}
+
+message UserResponse {
+    string user_id = 1;
+    string fullname = 2;
+    string email = 3;
+    string phone = 4;
+    string address = 5;
+    string bod = 6;
+    double score = 7;
+    string date_created = 8;
+    string last_logged = 9;
+}
+
+message LocationData {
+    double lat = 1;
+    double lng = 2;
+}
+
+message UploadStatus {
+    string msg = 1;
+    int32 count = 2;
+}
+
+message RideLocation {
+    string ride_id = 1;
+    string trace_id = 2;
+    string user_id = 3;
+    string driver_id = 4;
+    string start_time_unix = 5;
+    string start_location_lat = 6;
+    string start_location_lng = 7;
+    string destination_lat = 8;
+    string destination_lng = 9;
+    string estimated_arrival = 10;
+    double estimated_price = 11;
+    double chosen_payment_method = 12; 
+    
+}
+
+// Request chứa danh sách các chuyến xe muốn theo dõi
+message TrackRidesRequest {
+    repeated string ride_ids = 1;
+}
