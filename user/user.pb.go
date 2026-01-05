@@ -7,12 +7,11 @@
 package user
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -256,7 +255,8 @@ func (x *UserCreationRequest) GetScore() float64 {
 
 type UserCreationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IsDuplicated  int32                  `protobuf:"varint,1,opt,name=isDuplicated,proto3" json:"isDuplicated,omitempty"` // 0 - 1
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	IsDuplicated  int32                  `protobuf:"varint,2,opt,name=is_duplicated,json=isDuplicated,proto3" json:"is_duplicated,omitempty"` // 0 - 1
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -289,6 +289,13 @@ func (x *UserCreationResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UserCreationResponse.ProtoReflect.Descriptor instead.
 func (*UserCreationResponse) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UserCreationResponse) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
 }
 
 func (x *UserCreationResponse) GetIsDuplicated() int32 {
@@ -751,9 +758,10 @@ const file_user_proto_rawDesc = "" +
 	"\bpassword\x18\x04 \x01(\tR\bpassword\x12\x18\n" +
 	"\aaddress\x18\x05 \x01(\tR\aaddress\x12\x10\n" +
 	"\x03bod\x18\x06 \x01(\tR\x03bod\x12\x14\n" +
-	"\x05score\x18\a \x01(\x01R\x05score\":\n" +
-	"\x14UserCreationResponse\x12\"\n" +
-	"\fisDuplicated\x18\x01 \x01(\x05R\fisDuplicated\"*\n" +
+	"\x05score\x18\a \x01(\x01R\x05score\"T\n" +
+	"\x14UserCreationResponse\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12#\n" +
+	"\ris_duplicated\x18\x02 \x01(\x05R\fisDuplicated\"*\n" +
 	"\x0fUserInfoRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xf5\x01\n" +
 	"\fUserResponse\x12\x17\n" +

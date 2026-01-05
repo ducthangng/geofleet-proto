@@ -47,7 +47,8 @@ message UserCreationRequest {
 }
 
 message UserCreationResponse {
-    int32 isDuplicated = 1; // 0 - 1
+    string user_id = 1;
+    int32 is_duplicated = 2; // 0 - 1
 }
 
 message UserInfoRequest {
