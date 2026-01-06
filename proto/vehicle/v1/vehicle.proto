@@ -1,4 +1,4 @@
 syntax = "proto3";
 
 package vehicle.v1;
-option go_package = "github.com/ducthangng/geofleet-proto/proto/vehicle/v1";
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/vehicle/v1";

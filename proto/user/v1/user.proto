@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package user.v1;
-option go_package = "github.com/ducthangng/geofleet-proto/proto/user/v1";
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/user/v1";
 
 service UserService {
     // 1. Unary: call and receive

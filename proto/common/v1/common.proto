@@ -1,4 +1,4 @@
 syntax = "proto3";
 
 package common.v1;
-option go_package = "github.com/ducthangng/geofleet-proto/proto/common/v1";
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/common/v1";

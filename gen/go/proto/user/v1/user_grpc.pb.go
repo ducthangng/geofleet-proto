@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_CheckDuplicatedPhone_FullMethodName  = "/user.UserService/CheckDuplicatedPhone"
-	UserService_CreateUserProfile_FullMethodName     = "/user.UserService/CreateUserProfile"
-	UserService_Login_FullMethodName                 = "/user.UserService/Login"
-	UserService_GetUserProfile_FullMethodName        = "/user.UserService/GetUserProfile"
-	UserService_TrackMultipleRides_FullMethodName    = "/user.UserService/TrackMultipleRides"
-	UserService_UploadLocationHistory_FullMethodName = "/user.UserService/UploadLocationHistory"
+	UserService_CheckDuplicatedPhone_FullMethodName  = "/user.v1.UserService/CheckDuplicatedPhone"
+	UserService_CreateUserProfile_FullMethodName     = "/user.v1.UserService/CreateUserProfile"
+	UserService_Login_FullMethodName                 = "/user.v1.UserService/Login"
+	UserService_GetUserProfile_FullMethodName        = "/user.v1.UserService/GetUserProfile"
+	UserService_TrackMultipleRides_FullMethodName    = "/user.v1.UserService/TrackMultipleRides"
+	UserService_UploadLocationHistory_FullMethodName = "/user.v1.UserService/UploadLocationHistory"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -32,15 +32,15 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	// 1. Unary: call and receive
-	CheckDuplicatedPhone(ctx context.Context, in *PhoneDuplicationCheckRequest, opts ...grpc.CallOption) (*PhoneDuplicationCheckResponse, error)
+	CheckDuplicatedPhone(ctx context.Context, in *CheckDuplicatedPhoneRequest, opts ...grpc.CallOption) (*CheckDuplicatedPhoneResponse, error)
 	// 1. Unary: call and receive
-	CreateUserProfile(ctx context.Context, in *UserCreationRequest, opts ...grpc.CallOption) (*UserCreationResponse, error)
+	CreateUserProfile(ctx context.Context, in *CreateUserProfileRequest, opts ...grpc.CallOption) (*CreateUserProfileResponse, error)
 	// 1. Unary: call and receive
-	Login(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	// 1. Unary: call and receive
-	GetUserProfile(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 	// 2. Server streaming: send a number of data for tracking current rides happening in the service
-	TrackMultipleRides(ctx context.Context, in *TrackRidesRequest, opts ...grpc.CallOption) (UserService_TrackMultipleRidesClient, error)
+	TrackMultipleRides(ctx context.Context, in *TrackMultipleRidesRequest, opts ...grpc.CallOption) (UserService_TrackMultipleRidesClient, error)
 	// 3. Client Streaming: Gửi một loạt tọa độ GPS để lưu lịch sử di chuyển
 	UploadLocationHistory(ctx context.Context, opts ...grpc.CallOption) (UserService_UploadLocationHistoryClient, error)
 }
@@ -53,8 +53,8 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) CheckDuplicatedPhone(ctx context.Context, in *PhoneDuplicationCheckRequest, opts ...grpc.CallOption) (*PhoneDuplicationCheckResponse, error) {
-	out := new(PhoneDuplicationCheckResponse)
+func (c *userServiceClient) CheckDuplicatedPhone(ctx context.Context, in *CheckDuplicatedPhoneRequest, opts ...grpc.CallOption) (*CheckDuplicatedPhoneResponse, error) {
+	out := new(CheckDuplicatedPhoneResponse)
 	err := c.cc.Invoke(ctx, UserService_CheckDuplicatedPhone_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -62,8 +62,8 @@ func (c *userServiceClient) CheckDuplicatedPhone(ctx context.Context, in *PhoneD
 	return out, nil
 }
 
-func (c *userServiceClient) CreateUserProfile(ctx context.Context, in *UserCreationRequest, opts ...grpc.CallOption) (*UserCreationResponse, error) {
-	out := new(UserCreationResponse)
+func (c *userServiceClient) CreateUserProfile(ctx context.Context, in *CreateUserProfileRequest, opts ...grpc.CallOption) (*CreateUserProfileResponse, error) {
+	out := new(CreateUserProfileResponse)
 	err := c.cc.Invoke(ctx, UserService_CreateUserProfile_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,8 +71,8 @@ func (c *userServiceClient) CreateUserProfile(ctx context.Context, in *UserCreat
 	return out, nil
 }
 
-func (c *userServiceClient) Login(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserResponse, error) {
-	out := new(UserResponse)
+func (c *userServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, UserService_Login_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (c *userServiceClient) Login(ctx context.Context, in *UserLoginRequest, opt
 	return out, nil
 }
 
-func (c *userServiceClient) GetUserProfile(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserResponse, error) {
-	out := new(UserResponse)
+func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+	out := new(GetUserProfileResponse)
 	err := c.cc.Invoke(ctx, UserService_GetUserProfile_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *userServiceClient) GetUserProfile(ctx context.Context, in *UserInfoRequ
 	return out, nil
 }
 
-func (c *userServiceClient) TrackMultipleRides(ctx context.Context, in *TrackRidesRequest, opts ...grpc.CallOption) (UserService_TrackMultipleRidesClient, error) {
+func (c *userServiceClient) TrackMultipleRides(ctx context.Context, in *TrackMultipleRidesRequest, opts ...grpc.CallOption) (UserService_TrackMultipleRidesClient, error) {
 	stream, err := c.cc.NewStream(ctx, &UserService_ServiceDesc.Streams[0], UserService_TrackMultipleRides_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (c *userServiceClient) TrackMultipleRides(ctx context.Context, in *TrackRid
 }
 
 type UserService_TrackMultipleRidesClient interface {
-	Recv() (*RideLocation, error)
+	Recv() (*TrackMultipleRidesResponse, error)
 	grpc.ClientStream
 }
 
@@ -113,8 +113,8 @@ type userServiceTrackMultipleRidesClient struct {
 	grpc.ClientStream
 }
 
-func (x *userServiceTrackMultipleRidesClient) Recv() (*RideLocation, error) {
-	m := new(RideLocation)
+func (x *userServiceTrackMultipleRidesClient) Recv() (*TrackMultipleRidesResponse, error) {
+	m := new(TrackMultipleRidesResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -131,8 +131,8 @@ func (c *userServiceClient) UploadLocationHistory(ctx context.Context, opts ...g
 }
 
 type UserService_UploadLocationHistoryClient interface {
-	Send(*LocationData) error
-	CloseAndRecv() (*UploadStatus, error)
+	Send(*UploadLocationHistoryRequest) error
+	CloseAndRecv() (*UploadLocationHistoryResponse, error)
 	grpc.ClientStream
 }
 
@@ -140,15 +140,15 @@ type userServiceUploadLocationHistoryClient struct {
 	grpc.ClientStream
 }
 
-func (x *userServiceUploadLocationHistoryClient) Send(m *LocationData) error {
+func (x *userServiceUploadLocationHistoryClient) Send(m *UploadLocationHistoryRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *userServiceUploadLocationHistoryClient) CloseAndRecv() (*UploadStatus, error) {
+func (x *userServiceUploadLocationHistoryClient) CloseAndRecv() (*UploadLocationHistoryResponse, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
-	m := new(UploadStatus)
+	m := new(UploadLocationHistoryResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -160,15 +160,15 @@ func (x *userServiceUploadLocationHistoryClient) CloseAndRecv() (*UploadStatus, 
 // for forward compatibility
 type UserServiceServer interface {
 	// 1. Unary: call and receive
-	CheckDuplicatedPhone(context.Context, *PhoneDuplicationCheckRequest) (*PhoneDuplicationCheckResponse, error)
+	CheckDuplicatedPhone(context.Context, *CheckDuplicatedPhoneRequest) (*CheckDuplicatedPhoneResponse, error)
 	// 1. Unary: call and receive
-	CreateUserProfile(context.Context, *UserCreationRequest) (*UserCreationResponse, error)
+	CreateUserProfile(context.Context, *CreateUserProfileRequest) (*CreateUserProfileResponse, error)
 	// 1. Unary: call and receive
-	Login(context.Context, *UserLoginRequest) (*UserResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// 1. Unary: call and receive
-	GetUserProfile(context.Context, *UserInfoRequest) (*UserResponse, error)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	// 2. Server streaming: send a number of data for tracking current rides happening in the service
-	TrackMultipleRides(*TrackRidesRequest, UserService_TrackMultipleRidesServer) error
+	TrackMultipleRides(*TrackMultipleRidesRequest, UserService_TrackMultipleRidesServer) error
 	// 3. Client Streaming: Gửi một loạt tọa độ GPS để lưu lịch sử di chuyển
 	UploadLocationHistory(UserService_UploadLocationHistoryServer) error
 }
@@ -177,19 +177,19 @@ type UserServiceServer interface {
 type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) CheckDuplicatedPhone(context.Context, *PhoneDuplicationCheckRequest) (*PhoneDuplicationCheckResponse, error) {
+func (UnimplementedUserServiceServer) CheckDuplicatedPhone(context.Context, *CheckDuplicatedPhoneRequest) (*CheckDuplicatedPhoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckDuplicatedPhone not implemented")
 }
-func (UnimplementedUserServiceServer) CreateUserProfile(context.Context, *UserCreationRequest) (*UserCreationResponse, error) {
+func (UnimplementedUserServiceServer) CreateUserProfile(context.Context, *CreateUserProfileRequest) (*CreateUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUserProfile not implemented")
 }
-func (UnimplementedUserServiceServer) Login(context.Context, *UserLoginRequest) (*UserResponse, error) {
+func (UnimplementedUserServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *UserInfoRequest) (*UserResponse, error) {
+func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
-func (UnimplementedUserServiceServer) TrackMultipleRides(*TrackRidesRequest, UserService_TrackMultipleRidesServer) error {
+func (UnimplementedUserServiceServer) TrackMultipleRides(*TrackMultipleRidesRequest, UserService_TrackMultipleRidesServer) error {
 	return status.Errorf(codes.Unimplemented, "method TrackMultipleRides not implemented")
 }
 func (UnimplementedUserServiceServer) UploadLocationHistory(UserService_UploadLocationHistoryServer) error {
@@ -208,7 +208,7 @@ func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 }
 
 func _UserService_CheckDuplicatedPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PhoneDuplicationCheckRequest)
+	in := new(CheckDuplicatedPhoneRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -220,13 +220,13 @@ func _UserService_CheckDuplicatedPhone_Handler(srv interface{}, ctx context.Cont
 		FullMethod: UserService_CheckDuplicatedPhone_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CheckDuplicatedPhone(ctx, req.(*PhoneDuplicationCheckRequest))
+		return srv.(UserServiceServer).CheckDuplicatedPhone(ctx, req.(*CheckDuplicatedPhoneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_CreateUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserCreationRequest)
+	in := new(CreateUserProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -238,13 +238,13 @@ func _UserService_CreateUserProfile_Handler(srv interface{}, ctx context.Context
 		FullMethod: UserService_CreateUserProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CreateUserProfile(ctx, req.(*UserCreationRequest))
+		return srv.(UserServiceServer).CreateUserProfile(ctx, req.(*CreateUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserLoginRequest)
+	in := new(LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -256,13 +256,13 @@ func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: UserService_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).Login(ctx, req.(*UserLoginRequest))
+		return srv.(UserServiceServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfoRequest)
+	in := new(GetUserProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -274,13 +274,13 @@ func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: UserService_GetUserProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetUserProfile(ctx, req.(*UserInfoRequest))
+		return srv.(UserServiceServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_TrackMultipleRides_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(TrackRidesRequest)
+	m := new(TrackMultipleRidesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -288,7 +288,7 @@ func _UserService_TrackMultipleRides_Handler(srv interface{}, stream grpc.Server
 }
 
 type UserService_TrackMultipleRidesServer interface {
-	Send(*RideLocation) error
+	Send(*TrackMultipleRidesResponse) error
 	grpc.ServerStream
 }
 
@@ -296,7 +296,7 @@ type userServiceTrackMultipleRidesServer struct {
 	grpc.ServerStream
 }
 
-func (x *userServiceTrackMultipleRidesServer) Send(m *RideLocation) error {
+func (x *userServiceTrackMultipleRidesServer) Send(m *TrackMultipleRidesResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -305,8 +305,8 @@ func _UserService_UploadLocationHistory_Handler(srv interface{}, stream grpc.Ser
 }
 
 type UserService_UploadLocationHistoryServer interface {
-	SendAndClose(*UploadStatus) error
-	Recv() (*LocationData, error)
+	SendAndClose(*UploadLocationHistoryResponse) error
+	Recv() (*UploadLocationHistoryRequest, error)
 	grpc.ServerStream
 }
 
@@ -314,12 +314,12 @@ type userServiceUploadLocationHistoryServer struct {
 	grpc.ServerStream
 }
 
-func (x *userServiceUploadLocationHistoryServer) SendAndClose(m *UploadStatus) error {
+func (x *userServiceUploadLocationHistoryServer) SendAndClose(m *UploadLocationHistoryResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *userServiceUploadLocationHistoryServer) Recv() (*LocationData, error) {
-	m := new(LocationData)
+func (x *userServiceUploadLocationHistoryServer) Recv() (*UploadLocationHistoryRequest, error) {
+	m := new(UploadLocationHistoryRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -330,7 +330,7 @@ func (x *userServiceUploadLocationHistoryServer) Recv() (*LocationData, error) {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.UserService",
+	ServiceName: "user.v1.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
