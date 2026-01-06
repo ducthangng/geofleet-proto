@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package geofleet.common.v1;
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/geofleet/common/v1;commonv1";
+
+message LatLng {
+    double lat = 1;
+    double lng = 2;
+}

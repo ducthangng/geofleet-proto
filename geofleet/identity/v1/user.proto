@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package geofleet.identity.v1;
+import "google/protobuf/timestamp.proto"; // Dùng chuẩn thời gian của Google
+
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/geofleet/identity/v1;identityv1";
+
+enum UserRole {
+    USER_ROLE_UNSPECIFIED = 0;
+    USER_ROLE_PASSENGER = 1;
+    USER_ROLE_DRIVER = 2;
+}
+
+service UserService {
+    rpc CheckDuplicatedPhone(CheckDuplicatedPhoneRequest) returns (CheckDuplicatedPhoneResponse);
+    rpc CreateUserProfile(CreateUserProfileRequest) returns (CreateUserProfileResponse);
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message CheckDuplicatedPhoneRequest { string phone = 1; }
+message CheckDuplicatedPhoneResponse { bool is_duplicated = 1; }
+
+message LoginRequest {
+    string phone = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string user_id = 1;
+    string access_token = 2; // Senior tip: Trả về token thay vì role/address
+    UserRole role = 3;
+}
+
+message CreateUserProfileRequest {
+    string fullname = 1;
+    string email = 2;
+    string phone = 3;
+    string password = 4;
+    string address = 5;
+    google.protobuf.Timestamp bod = 6; // Dùng Timestamp thay vì string
+    UserRole role = 7;
+}
+
+message CreateUserProfileResponse {
+    string user_id = 1;
+}
+
+message GetUserProfileRequest { string user_id = 1; }
+
+message GetUserProfileResponse {
+    string user_id = 1;
+    string fullname = 2;
+    string email = 3;
+    string phone = 4;
+    string address = 5;
+    google.protobuf.Timestamp bod = 6;
+    UserRole role = 7;
+    double score = 8;
+    google.protobuf.Timestamp created_at = 9;
+}

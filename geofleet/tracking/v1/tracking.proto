@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package geofleet.tracking.v1;
+import "geofleet/common/v1/common.proto";
+
+option go_package = "github.com/ducthangng/geofleet-proto/gen/go/tracking/v1;trackingv1";
+
+service TrackingService {
+    // Client streaming: Driver liên tục gửi tọa độ
+    rpc UploadLocationHistory(stream UploadLocationHistoryRequest) returns (UploadLocationHistoryResponse);
+}
+
+message UploadLocationHistoryRequest {
+    string driver_id = 1;
+    geofleet.common.v1.LatLng location = 2;
+}
+
+message UploadLocationHistoryResponse {
+    string msg = 1;
+    int32 points_processed = 2;
+}
