@@ -1,42 +1,48 @@
 syntax = "proto3";
 
-package user;
+package user.v1;
 option go_package = "github.com/ducthangng/geofleet-proto/proto/user/v1";
 
 service UserService {
     // 1. Unary: call and receive
-    rpc CheckDuplicatedPhone(PhoneDuplicationCheckRequest) returns (PhoneDuplicationCheckResponse);
+    rpc CheckDuplicatedPhone(CheckDuplicatedPhoneRequest) returns (CheckDuplicatedPhoneResponse);
 
     // 1. Unary: call and receive
-    rpc CreateUserProfile(UserCreationRequest) returns (UserCreationResponse);
+    rpc CreateUserProfile(CreateUserProfileRequest) returns (CreateUserProfileResponse);
 
     // 1. Unary: call and receive
-    rpc Login(UserLoginRequest) returns (UserResponse);
+    rpc Login(LoginRequest) returns (LoginResponse);
 
     // 1. Unary: call and receive
-    rpc GetUserProfile(UserInfoRequest) returns (UserResponse);
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
 
     // 2. Server streaming: send a number of data for tracking current rides happening in the service
-    rpc TrackMultipleRides(TrackRidesRequest) returns (stream RideLocation);
+    rpc TrackMultipleRides(TrackMultipleRidesRequest) returns (stream TrackMultipleRidesResponse);
     
     // 3. Client Streaming: Gửi một loạt tọa độ GPS để lưu lịch sử di chuyển
-    rpc UploadLocationHistory(stream LocationData) returns (UploadStatus);
+    rpc UploadLocationHistory(stream UploadLocationHistoryRequest) returns (UploadLocationHistoryResponse);
 }
 
-message PhoneDuplicationCheckRequest {
+message CheckDuplicatedPhoneRequest {
     string phone = 1;
 }
 
-message PhoneDuplicationCheckResponse {
-    int32 isDuplicated = 1; // 0 - 1
+message CheckDuplicatedPhoneResponse {
+    int32 is_duplicated = 1; // 0 - 1
 }
 
-message UserLoginRequest {
+message LoginRequest {
     string phone = 1;
     string password = 2;
 }
 
-message UserCreationRequest {
+message LoginResponse {
+    string user_id = 1;
+    string address = 2;
+    string role = 3;
+}
+
+message CreateUserProfileRequest {
     string fullname = 1;
     string email = 2;
     string phone = 3;
@@ -47,16 +53,16 @@ message UserCreationRequest {
     double score = 8;
 }
 
-message UserCreationResponse {
+message CreateUserProfileResponse {
     string user_id = 1;
     int32 is_duplicated = 2; // 0 - 1
 }
 
-message UserInfoRequest {
+message GetUserProfileRequest {
     string user_id = 1;
 }
 
-message UserResponse {
+message GetUserProfileResponse {
     string user_id = 1;
     string fullname = 2;
     string email = 3;
@@ -68,17 +74,17 @@ message UserResponse {
     string date_created = 9;
 }
 
-message LocationData {
+message UploadLocationHistoryRequest {
     double lat = 1;
     double lng = 2;
 }
 
-message UploadStatus {
+message UploadLocationHistoryResponse {
     string msg = 1;
     int32 count = 2;
 }
 
-message RideLocation {
+message TrackMultipleRidesResponse {
     string ride_id = 1;
     string trace_id = 2;
     string user_id = 3;
@@ -95,6 +101,6 @@ message RideLocation {
 }
 
 // Request chứa danh sách các chuyến xe muốn theo dõi
-message TrackRidesRequest {
+message TrackMultipleRidesRequest {
     repeated string ride_ids = 1;
 }
