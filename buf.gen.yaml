@@ -1,0 +1,17 @@
+version: v1
+plugins:
+  # Plugin cho Go
+  - plugin: buf.build/protocolbuffers/go:v1.31.0
+    out: gen/go
+    opt: paths=source_relative
+  # Plugin cho gRPC Go
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: gen/go
+    opt: 
+      - paths=source_relative
+      - require_unimplemented_servers=false
+
+  # Plugin cho TypeScript (Dành cho Simulator Node.js)
+  - plugin: buf.build/connectrpc/es:v1.1.0
+    out: gen/ts
+    opt: target=ts

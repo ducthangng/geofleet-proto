@@ -1,0 +1,30 @@
+name: Proto Quality Gate
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  buf-lint-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code 
+      - name: checkout
+        uses: actions/checkout@v4
+
+      # 2. install Buf CLI
+      - name: Setup Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3. run Lint: examine the file's structures
+      - name: Buf Lint
+        uses: bufbuild/buf-lint-action@v1
+
+      # 4. Checking if any Breaking Changes exists
+      - name: Buf Breaking Change Check
+        uses: bufbuild/buf-breaking-action@v1
+        with:
+          against: 'https://github.com/${{ github.repository }}.git#branch=main'

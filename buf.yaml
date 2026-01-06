@@ -1,0 +1,12 @@
+version: v1
+name: buf.build/ducthangng/geofleet
+deps:
+  - buf.build/googleapis/googleapis
+lint:
+  use:
+    - DEFAULT
+  except:
+    - PACKAGE_DIRECTORY_MATCH
+breaking:
+  use:
+    - FILE

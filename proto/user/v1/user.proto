@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package user;
-option go_package = "github.com/ducthangng/geofleet/pb/user";
+option go_package = "github.com/ducthangng/geofleet-proto/proto/user/v1";
 
 service UserService {
     // 1. Unary: call and receive
@@ -43,7 +43,8 @@ message UserCreationRequest {
     string password = 4;
     string address = 5;
     string bod = 6;
-    double score = 7;
+    string role = 7;
+    double score = 8;
 }
 
 message UserCreationResponse {
@@ -62,9 +63,9 @@ message UserResponse {
     string phone = 4;
     string address = 5;
     string bod = 6;
-    double score = 7;
-    string date_created = 8;
-    string last_logged = 9;
+    string role = 7;
+    double score = 8;
+    string date_created = 9;
 }
 
 message LocationData {
