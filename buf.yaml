@@ -1,7 +1,10 @@
-version: v1
-name: buf.build/ducthangng/geofleet
+version: v2
+modules:
+  - path: geofleet
+    name: buf.build/ducthangng/geofleet
 deps:
   - buf.build/googleapis/googleapis
+  - buf.build/bufbuild/protovalidate
 lint:
   use:
     - STANDARD

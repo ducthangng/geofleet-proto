@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package geofleet.ride.v1;
-import "geofleet/common/v1/common.proto"; // Import LatLng
+import "common/v1/common.proto"; // Import LatLng
 
 option go_package = "github.com/ducthangng/geofleet-proto/gen/go/geofleet/ride/v1;ridev1";
 

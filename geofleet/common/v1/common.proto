@@ -2,8 +2,32 @@ syntax = "proto3";
 
 package geofleet.common.v1;
 option go_package = "github.com/ducthangng/geofleet-proto/gen/go/geofleet/common/v1;commonv1";
+import "buf/validate/validate.proto";
 
 message LatLng {
     double lat = 1;
     double lng = 2;
+}
+
+message Password {
+    string value = 1 [(buf.validate.field) = {
+        string: {min_len: 8},
+        cel: [
+            {
+                id: "password.lowercase",
+                message: "Must contain lowercase",
+                expression: "this.matches('[a-z]')"
+            },
+            {
+                id: "password.uppercase",
+                message: "Must contain uppercase",
+                expression: "this.matches('[A-Z]')"
+            },
+            {
+                id: "password.digit",
+                message: "Must contain digit",
+                expression: "this.matches('[0-9]')"
+            }
+        ]
+    }];
 }
