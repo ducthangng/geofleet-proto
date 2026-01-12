@@ -1,13 +1,36 @@
 syntax = "proto3";
 
 package geofleet.tracking.v1;
-import "common/v1/common.proto";
-
 option go_package = "github.com/ducthangng/geofleet-proto/gen/go/tracking/v1;trackingv1";
+
+// Import annotations OpenAPI
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "common/v1/common.proto";
+// import "google/api/annotations.proto";
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Geofleet Tracking API";
+    version: "1.0";
+  };
+};
 
 service TrackingService {
     // Client streaming: Driver liên tục gửi tọa độ
-    rpc UploadLocationHistory(stream UploadLocationHistoryRequest) returns (UploadLocationHistoryResponse);
+    rpc UploadLocationHistory(stream UploadLocationHistoryRequest) returns (UploadLocationHistoryResponse) {
+        // Thêm đoạn này:
+        // option (google.api.http) = {
+        //     post: "/v1/tracking/upload"
+        //     body: "*"
+        // };
+
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Stream tọa độ tài xế";
+            description: "Nhận luồng dữ liệu GPS liên tục từ simulator.";
+        };
+    };
+   
 }
 
 message UploadLocationHistoryRequest {

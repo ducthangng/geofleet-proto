@@ -15,6 +15,12 @@ export const TrackingService = {
     /**
      * Client streaming: Driver liên tục gửi tọa độ
      *
+     * Thêm đoạn này:
+     * option (google.api.http) = {
+     *     post: "/v1/tracking/upload"
+     *     body: "*"
+     * };
+     *
      * @generated from rpc geofleet.tracking.v1.TrackingService.UploadLocationHistory
      */
     uploadLocationHistory: {

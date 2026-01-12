@@ -36,7 +36,7 @@ message LoginRequest {
 
 message LoginResponse {
     string user_id = 1;
-    UserRole role = 2;
+    GetUserProfileResponse user = 2;
     string access_token = 3; // Senior tip: Trả về token thay vì role/address
 }
 
@@ -88,3 +88,4 @@ message GetUserProfileResponse {
     double score = 8;
     google.protobuf.Timestamp created_at = 9;
 }
+

@@ -1,0 +1,476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Geofleet Tracking API",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "TrackingService"
+    },
+    {
+      "name": "UserService"
+    },
+    {
+      "name": "RideService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/geofleet.identity.v1.UserService/CheckDuplicatedPhone": {
+      "post": {
+        "operationId": "UserService_CheckDuplicatedPhone",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckDuplicatedPhoneResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckDuplicatedPhoneRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/geofleet.identity.v1.UserService/CreateUserProfile": {
+      "post": {
+        "operationId": "UserService_CreateUserProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/geofleet.identity.v1.UserService/GetUserProfile": {
+      "post": {
+        "operationId": "UserService_GetUserProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetUserProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/geofleet.identity.v1.UserService/Login": {
+      "post": {
+        "operationId": "UserService_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/geofleet.ride.v1.RideService/TrackMultipleRides": {
+      "post": {
+        "summary": "Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)",
+        "operationId": "RideService_TrackMultipleRides",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1TrackMultipleRidesResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1TrackMultipleRidesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1TrackMultipleRidesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RideService"
+        ]
+      }
+    },
+    "/geofleet.tracking.v1.TrackingService/UploadLocationHistory": {
+      "post": {
+        "summary": "Stream tọa độ tài xế",
+        "description": "Nhận luồng dữ liệu GPS liên tục từ simulator.",
+        "operationId": "TrackingService_UploadLocationHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UploadLocationHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UploadLocationHistoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TrackingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CheckDuplicatedPhoneRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CheckDuplicatedPhoneResponse": {
+      "type": "object",
+      "properties": {
+        "isDuplicated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CreateUserProfileRequest": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "title": "2. Email"
+        },
+        "phone": {
+          "type": "string",
+          "title": "3. Phone: (Regex)"
+        },
+        "password": {
+          "$ref": "#/definitions/v1Password",
+          "title": "4. Password: Regex to force Capitalized, number, and special characters"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bod": {
+          "type": "string",
+          "format": "date-time",
+          "title": "5. BOD: required and must smaller than this time"
+        },
+        "role": {
+          "$ref": "#/definitions/v1UserRole",
+          "title": "6. Role: (UNSPECIFIED)"
+        }
+      }
+    },
+    "v1CreateUserProfileResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetUserProfileRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetUserProfileResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "uuid"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bod": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "role": {
+          "$ref": "#/definitions/v1UserRole"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1LatLng": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1LoginRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        },
+        "password": {
+          "$ref": "#/definitions/v1Password"
+        }
+      }
+    },
+    "v1LoginResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/v1GetUserProfileResponse"
+        },
+        "accessToken": {
+          "type": "string",
+          "title": "Senior tip: Trả về token thay vì role/address"
+        }
+      }
+    },
+    "v1Password": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TrackMultipleRidesRequest": {
+      "type": "object",
+      "properties": {
+        "rideIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1TrackMultipleRidesResponse": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "driverId": {
+          "type": "string"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "estimatedPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string",
+          "title": "e.g., ON_TRIP, PICKING_UP"
+        }
+      }
+    },
+    "v1UploadLocationHistoryRequest": {
+      "type": "object",
+      "properties": {
+        "driverId": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/v1LatLng"
+        }
+      }
+    },
+    "v1UploadLocationHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "pointsProcessed": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1UserRole": {
+      "type": "string",
+      "enum": [
+        "USER_ROLE_UNSPECIFIED",
+        "USER_ROLE_PASSENGER",
+        "USER_ROLE_DRIVER"
+      ],
+      "default": "USER_ROLE_UNSPECIFIED"
+    }
+  }
+}

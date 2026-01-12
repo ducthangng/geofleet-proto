@@ -10,6 +10,16 @@ plugins:
     opt: 
       - paths=source_relative
       - require_unimplemented_servers=false
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.0
+    out: gen/openapiv2
+    opt:
+      - json_names_for_fields=true
+      - logtostderr=true
+      # Tự động gộp tất cả các file proto vào 1 file Swagger duy nhất
+      - allow_merge=true
+      # Đặt tên cho file tổng đó (ví dụ: geofleet.swagger.json)
+      - merge_file_name=geofleet
+      - generate_unbound_methods=true
 
   # Plugin cho TypeScript (Dành cho Simulator Node.js)
   - plugin: buf.build/connectrpc/es:v1.1.0
