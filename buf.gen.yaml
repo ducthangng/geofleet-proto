@@ -21,7 +21,12 @@ plugins:
       - merge_file_name=geofleet
       - generate_unbound_methods=true
 
-  # Plugin cho TypeScript (Dành cho Simulator Node.js)
+  # 1. Plugin for Protobuf Messages (The "Data" part)
+  - plugin: buf.build/bufbuild/es:v1.10.0
+    out: gen/ts
+    opt: target=ts
+
+  # 2. Plugin for Connect/gRPC Services (The "Action" part)
   - plugin: buf.build/connectrpc/es:v1.1.0
     out: gen/ts
     opt: target=ts
