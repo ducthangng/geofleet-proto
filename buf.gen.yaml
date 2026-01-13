@@ -26,7 +26,7 @@ plugins:
     out: gen/ts
     opt: target=ts
 
-  # 2. Plugin for Connect/gRPC Services (The "Action" part)
-  - plugin: buf.build/connectrpc/es:v1.1.0
+  # Use the latest v1.x of the Connect-ES plugin
+  - plugin: buf.build/connectrpc/es:v1.4.0
     out: gen/ts
     opt: target=ts
