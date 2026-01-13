@@ -1,5 +1,5 @@
 {
-  "name": "geofleet-proto",
+  "name": "@geofleet/proto",
   "version": "1.0.0",
   "type": "module",
   "description": "Shared gRPC/Connect types for GeoFleet",
