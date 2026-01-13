@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Bundler", 
     "verbatimModuleSyntax": true,
     "declaration": true,
     "declarationMap": true,
@@ -13,6 +13,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["gen/ts/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["gen/ts/**/*"]
 }
