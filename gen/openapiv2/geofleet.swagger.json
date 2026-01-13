@@ -150,6 +150,48 @@
         ]
       }
     },
+    "/geofleet.ride.v1.RideService/GetRideStatus": {
+      "post": {
+        "summary": "Stream from server to clients - can be user / driver / or server admins",
+        "operationId": "RideService_GetRideStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1GetRideStatusResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1GetRideStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetRideStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RideService"
+        ]
+      }
+    },
     "/geofleet.ride.v1.RideService/TrackMultipleRides": {
       "post": {
         "summary": "Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)",
@@ -313,6 +355,65 @@
         }
       }
     },
+    "v1GetRideStatusRequest": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetRideStatusResponse": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "passengerId": {
+          "type": "string"
+        },
+        "driverId": {
+          "type": "string"
+        },
+        "pickupPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "dropoffPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
+        },
+        "estimateFare": {
+          "type": "number",
+          "format": "float"
+        },
+        "finalFare": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/v1PaymentMethod"
+        },
+        "cancelReason": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1GetUserProfileRequest": {
       "type": "object",
       "properties": {
@@ -403,6 +504,31 @@
           "type": "string"
         }
       }
+    },
+    "v1PaymentMethod": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_METHOD_UNSPECIFIED",
+        "PAYMENT_METHOD_CASH",
+        "PAYMENT_METHOD_WALLET",
+        "PAYMENT_METHOD_CARD"
+      ],
+      "default": "PAYMENT_METHOD_UNSPECIFIED"
+    },
+    "v1RideStatus": {
+      "type": "string",
+      "enum": [
+        "RIDE_STATUS_UNSPECIFIED",
+        "RIDE_STATUS_CREATED",
+        "RIDE_STATUS_MATCHING",
+        "RIDE_STATUS_ACCEPTED",
+        "RIDE_STATUS_ARRIVED",
+        "RIDE_STATUS_IN_PROGRESS",
+        "RIDE_STATUS_COMPLETED",
+        "RIDE_STATUS_CANCELLED"
+      ],
+      "default": "RIDE_STATUS_UNSPECIFIED",
+      "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
     },
     "v1TrackMultipleRidesRequest": {
       "type": "object",

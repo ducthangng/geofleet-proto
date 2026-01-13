@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: ride/v1/vehicle.proto
+// source: ride/v1/ride.proto
 
 package ridev1
 
@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	RideService_TrackMultipleRides_FullMethodName = "/geofleet.ride.v1.RideService/TrackMultipleRides"
+	RideService_GetRideStatus_FullMethodName      = "/geofleet.ride.v1.RideService/GetRideStatus"
 )
 
 // RideServiceClient is the client API for RideService service.
@@ -28,6 +29,8 @@ const (
 type RideServiceClient interface {
 	// Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)
 	TrackMultipleRides(ctx context.Context, in *TrackMultipleRidesRequest, opts ...grpc.CallOption) (RideService_TrackMultipleRidesClient, error)
+	// Stream from server to clients - can be user / driver / or server admins
+	GetRideStatus(ctx context.Context, in *GetRideStatusRequest, opts ...grpc.CallOption) (RideService_GetRideStatusClient, error)
 }
 
 type rideServiceClient struct {
@@ -70,12 +73,46 @@ func (x *rideServiceTrackMultipleRidesClient) Recv() (*TrackMultipleRidesRespons
 	return m, nil
 }
 
+func (c *rideServiceClient) GetRideStatus(ctx context.Context, in *GetRideStatusRequest, opts ...grpc.CallOption) (RideService_GetRideStatusClient, error) {
+	stream, err := c.cc.NewStream(ctx, &RideService_ServiceDesc.Streams[1], RideService_GetRideStatus_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &rideServiceGetRideStatusClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type RideService_GetRideStatusClient interface {
+	Recv() (*GetRideStatusResponse, error)
+	grpc.ClientStream
+}
+
+type rideServiceGetRideStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *rideServiceGetRideStatusClient) Recv() (*GetRideStatusResponse, error) {
+	m := new(GetRideStatusResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // RideServiceServer is the server API for RideService service.
 // All implementations should embed UnimplementedRideServiceServer
 // for forward compatibility
 type RideServiceServer interface {
 	// Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)
 	TrackMultipleRides(*TrackMultipleRidesRequest, RideService_TrackMultipleRidesServer) error
+	// Stream from server to clients - can be user / driver / or server admins
+	GetRideStatus(*GetRideStatusRequest, RideService_GetRideStatusServer) error
 }
 
 // UnimplementedRideServiceServer should be embedded to have forward compatible implementations.
@@ -84,6 +121,9 @@ type UnimplementedRideServiceServer struct {
 
 func (UnimplementedRideServiceServer) TrackMultipleRides(*TrackMultipleRidesRequest, RideService_TrackMultipleRidesServer) error {
 	return status.Errorf(codes.Unimplemented, "method TrackMultipleRides not implemented")
+}
+func (UnimplementedRideServiceServer) GetRideStatus(*GetRideStatusRequest, RideService_GetRideStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetRideStatus not implemented")
 }
 
 // UnsafeRideServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -118,6 +158,27 @@ func (x *rideServiceTrackMultipleRidesServer) Send(m *TrackMultipleRidesResponse
 	return x.ServerStream.SendMsg(m)
 }
 
+func _RideService_GetRideStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetRideStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RideServiceServer).GetRideStatus(m, &rideServiceGetRideStatusServer{stream})
+}
+
+type RideService_GetRideStatusServer interface {
+	Send(*GetRideStatusResponse) error
+	grpc.ServerStream
+}
+
+type rideServiceGetRideStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *rideServiceGetRideStatusServer) Send(m *GetRideStatusResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // RideService_ServiceDesc is the grpc.ServiceDesc for RideService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -131,6 +192,11 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 			Handler:       _RideService_TrackMultipleRides_Handler,
 			ServerStreams: true,
 		},
+		{
+			StreamName:    "GetRideStatus",
+			Handler:       _RideService_GetRideStatus_Handler,
+			ServerStreams: true,
+		},
 	},
-	Metadata: "ride/v1/vehicle.proto",
+	Metadata: "ride/v1/ride.proto",
 }
