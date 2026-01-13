@@ -22,11 +22,13 @@ plugins:
       - generate_unbound_methods=true
 
   # 1. Plugin for Protobuf Messages (The "Data" part)
+  # Plugin for TypeScript Messages (ES) - Upgraded to v2 compatible
+  # Use the latest available plugin for Protobuf-ES
   - plugin: buf.build/bufbuild/es:v1.10.0
     out: gen/ts
     opt: target=ts
 
-  # Use the latest v1.x of the Connect-ES plugin
-  - plugin: buf.build/connectrpc/es:v1.4.0
+  # Use the latest available plugin for Connect-ES
+  - plugin: buf.build/connectrpc/es:v1.6.1
     out: gen/ts
     opt: target=ts

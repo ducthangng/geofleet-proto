@@ -23,5 +23,10 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.10.2",
+    "i": "^0.3.7",
+    "npm": "^11.7.0"
   }
 }
