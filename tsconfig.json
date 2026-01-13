@@ -11,7 +11,10 @@
     "rootDir": "./gen/ts",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "buf/validate/*": ["./node_modules/@bufbuild/protovalidate/dist/buf/validate/*"]
+    }
   },
   "include": ["gen/ts/**/*"]
 }

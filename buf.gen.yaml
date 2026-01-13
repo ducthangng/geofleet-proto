@@ -1,34 +1,62 @@
-version: v1
+# version: v1
+# plugins:
+#   # Plugin cho Go
+#   - plugin: buf.build/protocolbuffers/go:v1.31.0
+#     out: gen/go
+#     opt: paths=source_relative
+#   # Plugin cho gRPC Go
+#   - plugin: buf.build/grpc/go:v1.3.0
+#     out: gen/go
+#     opt: 
+#       - paths=source_relative
+#       - require_unimplemented_servers=false
+#   - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.0
+#     out: gen/openapiv2
+#     opt:
+#       - json_names_for_fields=true
+#       - logtostderr=true
+#       # Tự động gộp tất cả các file proto vào 1 file Swagger duy nhất
+#       - allow_merge=true
+#       # Đặt tên cho file tổng đó (ví dụ: geofleet.swagger.json)
+#       - merge_file_name=geofleet
+#       - generate_unbound_methods=true
+
+#   # 1. Plugin for Protobuf Messages (The "Data" part)
+#   # Plugin for TypeScript Messages (ES) - Upgraded to v2 compatible
+#   # Use the latest available plugin for Protobuf-ES
+#   - remote: buf.build/bufbuild/es:v2.10.2
+#     out: gen/ts
+#     opt: target=ts
+
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/ducthangng/geofleet-proto/gen/go
+
 plugins:
-  # Plugin cho Go
-  - plugin: buf.build/protocolbuffers/go:v1.31.0
+  # --- Go Plugins ---
+  - remote: buf.build/protocolbuffers/go:v1.31.0
     out: gen/go
     opt: paths=source_relative
-  # Plugin cho gRPC Go
-  - plugin: buf.build/grpc/go:v1.3.0
+
+  - remote: buf.build/grpc/go:v1.5.1
     out: gen/go
-    opt: 
+    opt:
       - paths=source_relative
       - require_unimplemented_servers=false
-  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.0
+
+  # --- OpenAPI ---
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.22.0
     out: gen/openapiv2
     opt:
-      - json_names_for_fields=true
-      - logtostderr=true
-      # Tự động gộp tất cả các file proto vào 1 file Swagger duy nhất
       - allow_merge=true
-      # Đặt tên cho file tổng đó (ví dụ: geofleet.swagger.json)
       - merge_file_name=geofleet
-      - generate_unbound_methods=true
 
-  # 1. Plugin for Protobuf Messages (The "Data" part)
-  # Plugin for TypeScript Messages (ES) - Upgraded to v2 compatible
-  # Use the latest available plugin for Protobuf-ES
-  - plugin: buf.build/bufbuild/es:v1.10.0
+  # --- Modern TypeScript (ES v2) ---
+  - remote: buf.build/bufbuild/es:v2.2.3
     out: gen/ts
-    opt: target=ts
-
-  # Use the latest available plugin for Connect-ES
-  - plugin: buf.build/connectrpc/es:v1.6.1
-    out: gen/ts
-    opt: target=ts
+    opt: 
+      - target=ts
+      # - include_imports=true

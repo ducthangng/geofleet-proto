@@ -1,6 +1,6 @@
 # Lệnh dọn dẹp và gen lại từ đầu
 gen: clean
-	buf generate
+	buf generate --include-imports
 	@echo "✅ Đã generate code Go và TS thành công!"
 
 # Lệnh kiểm tra lỗi cú pháp

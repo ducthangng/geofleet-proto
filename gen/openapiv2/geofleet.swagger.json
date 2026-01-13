@@ -21,255 +21,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/geofleet.identity.v1.UserService/CheckDuplicatedPhone": {
-      "post": {
-        "operationId": "UserService_CheckDuplicatedPhone",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CheckDuplicatedPhoneResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1CheckDuplicatedPhoneRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/geofleet.identity.v1.UserService/CreateUserProfile": {
-      "post": {
-        "operationId": "UserService_CreateUserProfile",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateUserProfileResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1CreateUserProfileRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/geofleet.identity.v1.UserService/GetUserProfile": {
-      "post": {
-        "operationId": "UserService_GetUserProfile",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetUserProfileResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1GetUserProfileRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/geofleet.identity.v1.UserService/Login": {
-      "post": {
-        "operationId": "UserService_Login",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1LoginResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1LoginRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/geofleet.ride.v1.RideService/GetRideStatus": {
-      "post": {
-        "summary": "Stream from server to clients - can be user / driver / or server admins",
-        "operationId": "RideService_GetRideStatus",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/v1GetRideStatusResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of v1GetRideStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1GetRideStatusRequest"
-            }
-          }
-        ],
-        "tags": [
-          "RideService"
-        ]
-      }
-    },
-    "/geofleet.ride.v1.RideService/TrackMultipleRides": {
-      "post": {
-        "summary": "Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)",
-        "operationId": "RideService_TrackMultipleRides",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/v1TrackMultipleRidesResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of v1TrackMultipleRidesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1TrackMultipleRidesRequest"
-            }
-          }
-        ],
-        "tags": [
-          "RideService"
-        ]
-      }
-    },
-    "/geofleet.tracking.v1.TrackingService/UploadLocationHistory": {
-      "post": {
-        "summary": "Stream tọa độ tài xế",
-        "description": "Nhận luồng dữ liệu GPS liên tục từ simulator.",
-        "operationId": "TrackingService_UploadLocationHistory",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UploadLocationHistoryResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "description": " (streaming inputs)",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1UploadLocationHistoryRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TrackingService"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "protobufAny": {
       "type": "object",
@@ -299,14 +51,6 @@
         }
       }
     },
-    "v1CheckDuplicatedPhoneRequest": {
-      "type": "object",
-      "properties": {
-        "phone": {
-          "type": "string"
-        }
-      }
-    },
     "v1CheckDuplicatedPhoneResponse": {
       "type": "object",
       "properties": {
@@ -315,50 +59,10 @@
         }
       }
     },
-    "v1CreateUserProfileRequest": {
-      "type": "object",
-      "properties": {
-        "fullname": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string",
-          "title": "2. Email"
-        },
-        "phone": {
-          "type": "string",
-          "title": "3. Phone: (Regex)"
-        },
-        "password": {
-          "$ref": "#/definitions/v1Password",
-          "title": "4. Password: Regex to force Capitalized, number, and special characters"
-        },
-        "address": {
-          "type": "string"
-        },
-        "bod": {
-          "type": "string",
-          "format": "date-time",
-          "title": "5. BOD: required and must smaller than this time"
-        },
-        "role": {
-          "$ref": "#/definitions/v1UserRole",
-          "title": "6. Role: (UNSPECIFIED)"
-        }
-      }
-    },
     "v1CreateUserProfileResponse": {
       "type": "object",
       "properties": {
         "userId": {
-          "type": "string"
-        }
-      }
-    },
-    "v1GetRideStatusRequest": {
-      "type": "object",
-      "properties": {
-        "rideId": {
           "type": "string"
         }
       }
@@ -414,14 +118,6 @@
         }
       }
     },
-    "v1GetUserProfileRequest": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string"
-        }
-      }
-    },
     "v1GetUserProfileResponse": {
       "type": "object",
       "properties": {
@@ -468,17 +164,6 @@
         "lng": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "v1LoginRequest": {
-      "type": "object",
-      "properties": {
-        "phone": {
-          "type": "string"
-        },
-        "password": {
-          "$ref": "#/definitions/v1Password"
         }
       }
     },
@@ -530,17 +215,6 @@
       "default": "RIDE_STATUS_UNSPECIFIED",
       "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
     },
-    "v1TrackMultipleRidesRequest": {
-      "type": "object",
-      "properties": {
-        "rideIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "v1TrackMultipleRidesResponse": {
       "type": "object",
       "properties": {
@@ -563,17 +237,6 @@
         "status": {
           "type": "string",
           "title": "e.g., ON_TRIP, PICKING_UP"
-        }
-      }
-    },
-    "v1UploadLocationHistoryRequest": {
-      "type": "object",
-      "properties": {
-        "driverId": {
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/v1LatLng"
         }
       }
     },
