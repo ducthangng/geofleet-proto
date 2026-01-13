@@ -2,6 +2,12 @@
   "name": "@geofleet/proto",
   "version": "1.0.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "description": "Shared gRPC/Connect types for GeoFleet",
   "main": "./gen/ts/index.js",
   "types": "./gen/ts/index.d.ts",
