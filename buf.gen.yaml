@@ -34,6 +34,7 @@ managed:
   override:
     - file_option: go_package_prefix
       value: github.com/ducthangng/geofleet-proto/gen/go
+      module: buf.build/ducthangng/geofleet
 
 plugins:
   # --- Go Plugins ---

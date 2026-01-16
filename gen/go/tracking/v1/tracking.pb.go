@@ -8,7 +8,7 @@ package trackingv1
 
 import (
 	v1 "github.com/ducthangng/geofleet-proto/gen/go/common/v1"
-	_ "github.com/ducthangng/geofleet-proto/gen/go/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

@@ -7,7 +7,7 @@
 package identityv1
 
 import (
-	_ "github.com/ducthangng/geofleet-proto/gen/go/buf/validate"
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/ducthangng/geofleet-proto/gen/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
