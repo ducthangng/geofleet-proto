@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	RideService_TrackMultipleRides_FullMethodName = "/geofleet.ride.v1.RideService/TrackMultipleRides"
-	RideService_GetRideStatus_FullMethodName      = "/geofleet.ride.v1.RideService/GetRideStatus"
+	RideService_RequestRide_FullMethodName        = "/geofleet.ride.v1.RideService/RequestRide"
 )
 
 // RideServiceClient is the client API for RideService service.
@@ -32,7 +32,7 @@ type RideServiceClient interface {
 	// Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)
 	TrackMultipleRides(ctx context.Context, in *TrackMultipleRidesRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TrackMultipleRidesResponse], error)
 	// Stream from server to clients - can be user / driver / or server admins
-	GetRideStatus(ctx context.Context, in *GetRideStatusRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetRideStatusResponse], error)
+	RequestRide(ctx context.Context, in *RequestRideRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RequestRideResponse], error)
 }
 
 type rideServiceClient struct {
@@ -62,13 +62,13 @@ func (c *rideServiceClient) TrackMultipleRides(ctx context.Context, in *TrackMul
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_TrackMultipleRidesClient = grpc.ServerStreamingClient[TrackMultipleRidesResponse]
 
-func (c *rideServiceClient) GetRideStatus(ctx context.Context, in *GetRideStatusRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetRideStatusResponse], error) {
+func (c *rideServiceClient) RequestRide(ctx context.Context, in *RequestRideRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RequestRideResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &RideService_ServiceDesc.Streams[1], RideService_GetRideStatus_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &RideService_ServiceDesc.Streams[1], RideService_RequestRide_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[GetRideStatusRequest, GetRideStatusResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[RequestRideRequest, RequestRideResponse]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (c *rideServiceClient) GetRideStatus(ctx context.Context, in *GetRideStatus
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RideService_GetRideStatusClient = grpc.ServerStreamingClient[GetRideStatusResponse]
+type RideService_RequestRideClient = grpc.ServerStreamingClient[RequestRideResponse]
 
 // RideServiceServer is the server API for RideService service.
 // All implementations should embed UnimplementedRideServiceServer
@@ -90,7 +90,7 @@ type RideServiceServer interface {
 	// Theo dõi nhiều chuyến xe cùng lúc (Server Streaming)
 	TrackMultipleRides(*TrackMultipleRidesRequest, grpc.ServerStreamingServer[TrackMultipleRidesResponse]) error
 	// Stream from server to clients - can be user / driver / or server admins
-	GetRideStatus(*GetRideStatusRequest, grpc.ServerStreamingServer[GetRideStatusResponse]) error
+	RequestRide(*RequestRideRequest, grpc.ServerStreamingServer[RequestRideResponse]) error
 }
 
 // UnimplementedRideServiceServer should be embedded to have
@@ -103,8 +103,8 @@ type UnimplementedRideServiceServer struct{}
 func (UnimplementedRideServiceServer) TrackMultipleRides(*TrackMultipleRidesRequest, grpc.ServerStreamingServer[TrackMultipleRidesResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method TrackMultipleRides not implemented")
 }
-func (UnimplementedRideServiceServer) GetRideStatus(*GetRideStatusRequest, grpc.ServerStreamingServer[GetRideStatusResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method GetRideStatus not implemented")
+func (UnimplementedRideServiceServer) RequestRide(*RequestRideRequest, grpc.ServerStreamingServer[RequestRideResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method RequestRide not implemented")
 }
 func (UnimplementedRideServiceServer) testEmbeddedByValue() {}
 
@@ -137,16 +137,16 @@ func _RideService_TrackMultipleRides_Handler(srv interface{}, stream grpc.Server
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_TrackMultipleRidesServer = grpc.ServerStreamingServer[TrackMultipleRidesResponse]
 
-func _RideService_GetRideStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetRideStatusRequest)
+func _RideService_RequestRide_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(RequestRideRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(RideServiceServer).GetRideStatus(m, &grpc.GenericServerStream[GetRideStatusRequest, GetRideStatusResponse]{ServerStream: stream})
+	return srv.(RideServiceServer).RequestRide(m, &grpc.GenericServerStream[RequestRideRequest, RequestRideResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RideService_GetRideStatusServer = grpc.ServerStreamingServer[GetRideStatusResponse]
+type RideService_RequestRideServer = grpc.ServerStreamingServer[RequestRideResponse]
 
 // RideService_ServiceDesc is the grpc.ServiceDesc for RideService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -162,8 +162,8 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "GetRideStatus",
-			Handler:       _RideService_GetRideStatus_Handler,
+			StreamName:    "RequestRide",
+			Handler:       _RideService_RequestRide_Handler,
 			ServerStreams: true,
 		},
 	},

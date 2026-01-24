@@ -67,57 +67,6 @@
         }
       }
     },
-    "v1GetRideStatusResponse": {
-      "type": "object",
-      "properties": {
-        "rideId": {
-          "type": "string"
-        },
-        "passengerId": {
-          "type": "string"
-        },
-        "driverId": {
-          "type": "string"
-        },
-        "pickupPoint": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "dropoffPoint": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "currentLocation": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "rideStatus": {
-          "$ref": "#/definitions/v1RideStatus"
-        },
-        "estimateFare": {
-          "type": "number",
-          "format": "float"
-        },
-        "finalFare": {
-          "type": "number",
-          "format": "float"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "paymentMethod": {
-          "$ref": "#/definitions/v1PaymentMethod"
-        },
-        "cancelReason": {
-          "type": "string"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
     "v1GetUserProfileResponse": {
       "type": "object",
       "properties": {
@@ -199,6 +148,57 @@
         "PAYMENT_METHOD_CARD"
       ],
       "default": "PAYMENT_METHOD_UNSPECIFIED"
+    },
+    "v1RequestRideResponse": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "passengerId": {
+          "type": "string"
+        },
+        "driverId": {
+          "type": "string"
+        },
+        "pickupPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "dropoffPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
+        },
+        "estimateFare": {
+          "type": "number",
+          "format": "float"
+        },
+        "finalFare": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/v1PaymentMethod"
+        },
+        "cancelReason": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "v1RideStatus": {
       "type": "string",
