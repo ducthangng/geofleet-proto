@@ -34,27 +34,29 @@ enum PaymentMethod {
 }
 
 message RequestRideRequest {
-    string ride_id = 1;
+    string user_id = 1;
+
+    geofleet.common.v1.LatLng pickup_point = 2;
+    geofleet.common.v1.LatLng dropoff_point = 3;
+    geofleet.common.v1.LatLng current_location = 4;
+    
+    PaymentMethod payment_method = 5;
+
+    RideStatus ride_status = 6;
+    google.protobuf.Timestamp created_at = 7;
 }
 
 message RequestRideResponse {
     string ride_id = 1;
     string passenger_id = 2;
     string driver_id = 3;
-    geofleet.common.v1.LatLng pickup_point = 4;
-    geofleet.common.v1.LatLng dropoff_point = 5;
-    geofleet.common.v1.LatLng current_location = 6;
-
-    RideStatus ride_status = 7;
-
-    float estimate_fare = 8;
-    float final_fare = 9;
-    string currency = 10;
-    PaymentMethod payment_method = 11;
-
-    string cancel_reason = 12; 
-    google.protobuf.Timestamp created_at = 13;
-    google.protobuf.Timestamp updated_at = 14;
+    float estimate_fare = 4;
+    float final_fare = 5;
+    RideStatus ride_status = 6;
+    
+    // string cancel_reason = 12; 
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
 }
 
 message TrackMultipleRidesRequest {

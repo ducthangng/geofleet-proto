@@ -14,16 +14,46 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file ride/v1/ride.proto.
  */
 export const file_ride_v1_ride: GenFile = /*@__PURE__*/
-  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEiJQoSUmVxdWVzdFJpZGVSZXF1ZXN0Eg8KB3JpZGVfaWQYASABKAkiigQKE1JlcXVlc3RSaWRlUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIUCgxwYXNzZW5nZXJfaWQYAiABKAkSEQoJZHJpdmVyX2lkGAMgASgJEjAKDHBpY2t1cF9wb2ludBgEIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSMQoNZHJvcG9mZl9wb2ludBgFIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSNAoQY3VycmVudF9sb2NhdGlvbhgGIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSMQoLcmlkZV9zdGF0dXMYByABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMSFQoNZXN0aW1hdGVfZmFyZRgIIAEoAhISCgpmaW5hbF9mYXJlGAkgASgCEhAKCGN1cnJlbmN5GAogASgJEjcKDnBheW1lbnRfbWV0aG9kGAsgASgOMh8uZ2VvZmxlZXQucmlkZS52MS5QYXltZW50TWV0aG9kEhUKDWNhbmNlbF9yZWFzb24YDCABKAkSLgoKY3JlYXRlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLQoZVHJhY2tNdWx0aXBsZVJpZGVzUmVxdWVzdBIQCghyaWRlX2lkcxgBIAMoCSKwAQoaVHJhY2tNdWx0aXBsZVJpZGVzUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEhEKCWRyaXZlcl9pZBgDIAEoCRI0ChBjdXJyZW50X2xvY2F0aW9uGAQgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIXCg9lc3RpbWF0ZWRfcHJpY2UYBSABKAESDgoGc3RhdHVzGAYgASgJKuIBCgpSaWRlU3RhdHVzEhsKF1JJREVfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTUklERV9TVEFUVVNfQ1JFQVRFRBABEhgKFFJJREVfU1RBVFVTX01BVENISU5HEAISGAoUUklERV9TVEFUVVNfQUNDRVBURUQQAxIXChNSSURFX1NUQVRVU19BUlJJVkVEEAQSGwoXUklERV9TVEFUVVNfSU5fUFJPR1JFU1MQBRIZChVSSURFX1NUQVRVU19DT01QTEVURUQQBhIZChVSSURFX1NUQVRVU19DQU5DRUxMRUQQByp8Cg1QYXltZW50TWV0aG9kEh4KGlBBWU1FTlRfTUVUSE9EX1VOU1BFQ0lGSUVEEAASFwoTUEFZTUVOVF9NRVRIT0RfQ0FTSBABEhkKFVBBWU1FTlRfTUVUSE9EX1dBTExFVBACEhcKE1BBWU1FTlRfTUVUSE9EX0NBUkQQAzLeAQoLUmlkZVNlcnZpY2UScQoSVHJhY2tNdWx0aXBsZVJpZGVzEisuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXF1ZXN0GiwuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXNwb25zZTABElwKC1JlcXVlc3RSaWRlEiQuZ2VvZmxlZXQucmlkZS52MS5SZXF1ZXN0UmlkZVJlcXVlc3QaJS5nZW9mbGVldC5yaWRlLnYxLlJlcXVlc3RSaWRlUmVzcG9uc2UwAUK/AQoUY29tLmdlb2ZsZWV0LnJpZGUudjFCCVJpZGVQcm90b1ABWjpnaXRodWIuY29tL2R1Y3RoYW5nbmcvZ2VvZmxlZXQtcHJvdG8vZ2VuL2dvL3JpZGUvdjE7cmlkZXYxogIDR1JYqgIQR2VvZmxlZXQuUmlkZS5WMcoCEEdlb2ZsZWV0XFJpZGVcVjHiAhxHZW9mbGVldFxSaWRlXFYxXEdQQk1ldGFkYXRh6gISR2VvZmxlZXQ6OlJpZGU6OlYxYgZwcm90bzM", [file_common_v1_common, file_google_protobuf_timestamp]);
+  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEi3AIKElJlcXVlc3RSaWRlUmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJEjAKDHBpY2t1cF9wb2ludBgCIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSMQoNZHJvcG9mZl9wb2ludBgDIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSNAoQY3VycmVudF9sb2NhdGlvbhgEIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSNwoOcGF5bWVudF9tZXRob2QYBSABKA4yHy5nZW9mbGVldC5yaWRlLnYxLlBheW1lbnRNZXRob2QSMQoLcmlkZV9zdGF0dXMYBiABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMSLgoKY3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAijQIKE1JlcXVlc3RSaWRlUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIUCgxwYXNzZW5nZXJfaWQYAiABKAkSEQoJZHJpdmVyX2lkGAMgASgJEhUKDWVzdGltYXRlX2ZhcmUYBCABKAISEgoKZmluYWxfZmFyZRgFIAEoAhIxCgtyaWRlX3N0YXR1cxgGIAEoDjIcLmdlb2ZsZWV0LnJpZGUudjEuUmlkZVN0YXR1cxIuCgpjcmVhdGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCItChlUcmFja011bHRpcGxlUmlkZXNSZXF1ZXN0EhAKCHJpZGVfaWRzGAEgAygJIrABChpUcmFja011bHRpcGxlUmlkZXNSZXNwb25zZRIPCgdyaWRlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSEQoJZHJpdmVyX2lkGAMgASgJEjQKEGN1cnJlbnRfbG9jYXRpb24YBCABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nEhcKD2VzdGltYXRlZF9wcmljZRgFIAEoARIOCgZzdGF0dXMYBiABKAkq4gEKClJpZGVTdGF0dXMSGwoXUklERV9TVEFUVVNfVU5TUEVDSUZJRUQQABIXChNSSURFX1NUQVRVU19DUkVBVEVEEAESGAoUUklERV9TVEFUVVNfTUFUQ0hJTkcQAhIYChRSSURFX1NUQVRVU19BQ0NFUFRFRBADEhcKE1JJREVfU1RBVFVTX0FSUklWRUQQBBIbChdSSURFX1NUQVRVU19JTl9QUk9HUkVTUxAFEhkKFVJJREVfU1RBVFVTX0NPTVBMRVRFRBAGEhkKFVJJREVfU1RBVFVTX0NBTkNFTExFRBAHKnwKDVBheW1lbnRNZXRob2QSHgoaUEFZTUVOVF9NRVRIT0RfVU5TUEVDSUZJRUQQABIXChNQQVlNRU5UX01FVEhPRF9DQVNIEAESGQoVUEFZTUVOVF9NRVRIT0RfV0FMTEVUEAISFwoTUEFZTUVOVF9NRVRIT0RfQ0FSRBADMt4BCgtSaWRlU2VydmljZRJxChJUcmFja011bHRpcGxlUmlkZXMSKy5nZW9mbGVldC5yaWRlLnYxLlRyYWNrTXVsdGlwbGVSaWRlc1JlcXVlc3QaLC5nZW9mbGVldC5yaWRlLnYxLlRyYWNrTXVsdGlwbGVSaWRlc1Jlc3BvbnNlMAESXAoLUmVxdWVzdFJpZGUSJC5nZW9mbGVldC5yaWRlLnYxLlJlcXVlc3RSaWRlUmVxdWVzdBolLmdlb2ZsZWV0LnJpZGUudjEuUmVxdWVzdFJpZGVSZXNwb25zZTABQr8BChRjb20uZ2VvZmxlZXQucmlkZS52MUIJUmlkZVByb3RvUAFaOmdpdGh1Yi5jb20vZHVjdGhhbmduZy9nZW9mbGVldC1wcm90by9nZW4vZ28vcmlkZS92MTtyaWRldjGiAgNHUliqAhBHZW9mbGVldC5SaWRlLlYxygIQR2VvZmxlZXRcUmlkZVxWMeICHEdlb2ZsZWV0XFJpZGVcVjFcR1BCTWV0YWRhdGHqAhJHZW9mbGVldDo6UmlkZTo6VjFiBnByb3RvMw", [file_common_v1_common, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message geofleet.ride.v1.RequestRideRequest
  */
 export type RequestRideRequest = Message<"geofleet.ride.v1.RequestRideRequest"> & {
   /**
-   * @generated from field: string ride_id = 1;
+   * @generated from field: string user_id = 1;
    */
-  rideId: string;
+  userId: string;
+
+  /**
+   * @generated from field: geofleet.common.v1.LatLng pickup_point = 2;
+   */
+  pickupPoint?: LatLng;
+
+  /**
+   * @generated from field: geofleet.common.v1.LatLng dropoff_point = 3;
+   */
+  dropoffPoint?: LatLng;
+
+  /**
+   * @generated from field: geofleet.common.v1.LatLng current_location = 4;
+   */
+  currentLocation?: LatLng;
+
+  /**
+   * @generated from field: geofleet.ride.v1.PaymentMethod payment_method = 5;
+   */
+  paymentMethod: PaymentMethod;
+
+  /**
+   * @generated from field: geofleet.ride.v1.RideStatus ride_status = 6;
+   */
+  rideStatus: RideStatus;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
+   */
+  createdAt?: Timestamp;
 };
 
 /**
@@ -53,57 +83,29 @@ export type RequestRideResponse = Message<"geofleet.ride.v1.RequestRideResponse"
   driverId: string;
 
   /**
-   * @generated from field: geofleet.common.v1.LatLng pickup_point = 4;
-   */
-  pickupPoint?: LatLng;
-
-  /**
-   * @generated from field: geofleet.common.v1.LatLng dropoff_point = 5;
-   */
-  dropoffPoint?: LatLng;
-
-  /**
-   * @generated from field: geofleet.common.v1.LatLng current_location = 6;
-   */
-  currentLocation?: LatLng;
-
-  /**
-   * @generated from field: geofleet.ride.v1.RideStatus ride_status = 7;
-   */
-  rideStatus: RideStatus;
-
-  /**
-   * @generated from field: float estimate_fare = 8;
+   * @generated from field: float estimate_fare = 4;
    */
   estimateFare: number;
 
   /**
-   * @generated from field: float final_fare = 9;
+   * @generated from field: float final_fare = 5;
    */
   finalFare: number;
 
   /**
-   * @generated from field: string currency = 10;
+   * @generated from field: geofleet.ride.v1.RideStatus ride_status = 6;
    */
-  currency: string;
+  rideStatus: RideStatus;
 
   /**
-   * @generated from field: geofleet.ride.v1.PaymentMethod payment_method = 11;
-   */
-  paymentMethod: PaymentMethod;
-
-  /**
-   * @generated from field: string cancel_reason = 12;
-   */
-  cancelReason: string;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp created_at = 13;
+   * string cancel_reason = 12; 
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
    */
   createdAt?: Timestamp;
 
   /**
-   * @generated from field: google.protobuf.Timestamp updated_at = 14;
+   * @generated from field: google.protobuf.Timestamp updated_at = 8;
    */
   updatedAt?: Timestamp;
 };

@@ -161,18 +161,6 @@
         "driverId": {
           "type": "string"
         },
-        "pickupPoint": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "dropoffPoint": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "currentLocation": {
-          "$ref": "#/definitions/v1LatLng"
-        },
-        "rideStatus": {
-          "$ref": "#/definitions/v1RideStatus"
-        },
         "estimateFare": {
           "type": "number",
           "format": "float"
@@ -181,18 +169,13 @@
           "type": "number",
           "format": "float"
         },
-        "currency": {
-          "type": "string"
-        },
-        "paymentMethod": {
-          "$ref": "#/definitions/v1PaymentMethod"
-        },
-        "cancelReason": {
-          "type": "string"
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "string cancel_reason = 12;"
         },
         "updatedAt": {
           "type": "string",
