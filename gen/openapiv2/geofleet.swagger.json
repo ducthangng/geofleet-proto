@@ -149,22 +149,7 @@
       ],
       "default": "PAYMENT_METHOD_UNSPECIFIED"
     },
-    "v1RideStatus": {
-      "type": "string",
-      "enum": [
-        "RIDE_STATUS_UNSPECIFIED",
-        "RIDE_STATUS_CREATED",
-        "RIDE_STATUS_MATCHING",
-        "RIDE_STATUS_ACCEPTED",
-        "RIDE_STATUS_ARRIVED",
-        "RIDE_STATUS_IN_PROGRESS",
-        "RIDE_STATUS_COMPLETED",
-        "RIDE_STATUS_CANCELLED"
-      ],
-      "default": "RIDE_STATUS_UNSPECIFIED",
-      "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
-    },
-    "v1RideStatusUpdate": {
+    "v1RequestRideResponse": {
       "type": "object",
       "properties": {
         "rideId": {
@@ -214,6 +199,21 @@
           "format": "date-time"
         }
       }
+    },
+    "v1RideStatus": {
+      "type": "string",
+      "enum": [
+        "RIDE_STATUS_UNSPECIFIED",
+        "RIDE_STATUS_CREATED",
+        "RIDE_STATUS_MATCHING",
+        "RIDE_STATUS_ACCEPTED",
+        "RIDE_STATUS_ARRIVED",
+        "RIDE_STATUS_IN_PROGRESS",
+        "RIDE_STATUS_COMPLETED",
+        "RIDE_STATUS_CANCELLED"
+      ],
+      "default": "RIDE_STATUS_UNSPECIFIED",
+      "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
     },
     "v1TrackMultipleRidesResponse": {
       "type": "object",
