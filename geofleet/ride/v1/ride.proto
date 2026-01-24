@@ -12,7 +12,7 @@ service RideService {
     rpc TrackMultipleRides(TrackMultipleRidesRequest) returns (stream TrackMultipleRidesResponse);
 
     // Stream from server to clients - can be user / driver / or server admins
-    rpc RequestRide(RequestRideRequest) returns (stream RequestRideResponse);
+    rpc RequestRide(RideRequest) returns (stream RideStatusUpdate);
 }
 
 enum RideStatus {
@@ -33,11 +33,11 @@ enum PaymentMethod {
     PAYMENT_METHOD_CARD = 3;
 }
 
-message RequestRideRequest {
+message RideRequest {
     string ride_id = 1;
 }
 
-message RequestRideResponse {
+message RideStatusUpdate {
     string ride_id = 1;
     string passenger_id = 2;
     string driver_id = 3;

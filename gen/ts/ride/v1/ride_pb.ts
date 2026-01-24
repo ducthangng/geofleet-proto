@@ -14,12 +14,12 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file ride/v1/ride.proto.
  */
 export const file_ride_v1_ride: GenFile = /*@__PURE__*/
-  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEiJQoSUmVxdWVzdFJpZGVSZXF1ZXN0Eg8KB3JpZGVfaWQYASABKAkiigQKE1JlcXVlc3RSaWRlUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIUCgxwYXNzZW5nZXJfaWQYAiABKAkSEQoJZHJpdmVyX2lkGAMgASgJEjAKDHBpY2t1cF9wb2ludBgEIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSMQoNZHJvcG9mZl9wb2ludBgFIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSNAoQY3VycmVudF9sb2NhdGlvbhgGIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSMQoLcmlkZV9zdGF0dXMYByABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMSFQoNZXN0aW1hdGVfZmFyZRgIIAEoAhISCgpmaW5hbF9mYXJlGAkgASgCEhAKCGN1cnJlbmN5GAogASgJEjcKDnBheW1lbnRfbWV0aG9kGAsgASgOMh8uZ2VvZmxlZXQucmlkZS52MS5QYXltZW50TWV0aG9kEhUKDWNhbmNlbF9yZWFzb24YDCABKAkSLgoKY3JlYXRlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLQoZVHJhY2tNdWx0aXBsZVJpZGVzUmVxdWVzdBIQCghyaWRlX2lkcxgBIAMoCSKwAQoaVHJhY2tNdWx0aXBsZVJpZGVzUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEhEKCWRyaXZlcl9pZBgDIAEoCRI0ChBjdXJyZW50X2xvY2F0aW9uGAQgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIXCg9lc3RpbWF0ZWRfcHJpY2UYBSABKAESDgoGc3RhdHVzGAYgASgJKuIBCgpSaWRlU3RhdHVzEhsKF1JJREVfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTUklERV9TVEFUVVNfQ1JFQVRFRBABEhgKFFJJREVfU1RBVFVTX01BVENISU5HEAISGAoUUklERV9TVEFUVVNfQUNDRVBURUQQAxIXChNSSURFX1NUQVRVU19BUlJJVkVEEAQSGwoXUklERV9TVEFUVVNfSU5fUFJPR1JFU1MQBRIZChVSSURFX1NUQVRVU19DT01QTEVURUQQBhIZChVSSURFX1NUQVRVU19DQU5DRUxMRUQQByp8Cg1QYXltZW50TWV0aG9kEh4KGlBBWU1FTlRfTUVUSE9EX1VOU1BFQ0lGSUVEEAASFwoTUEFZTUVOVF9NRVRIT0RfQ0FTSBABEhkKFVBBWU1FTlRfTUVUSE9EX1dBTExFVBACEhcKE1BBWU1FTlRfTUVUSE9EX0NBUkQQAzLeAQoLUmlkZVNlcnZpY2UScQoSVHJhY2tNdWx0aXBsZVJpZGVzEisuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXF1ZXN0GiwuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXNwb25zZTABElwKC1JlcXVlc3RSaWRlEiQuZ2VvZmxlZXQucmlkZS52MS5SZXF1ZXN0UmlkZVJlcXVlc3QaJS5nZW9mbGVldC5yaWRlLnYxLlJlcXVlc3RSaWRlUmVzcG9uc2UwAUK/AQoUY29tLmdlb2ZsZWV0LnJpZGUudjFCCVJpZGVQcm90b1ABWjpnaXRodWIuY29tL2R1Y3RoYW5nbmcvZ2VvZmxlZXQtcHJvdG8vZ2VuL2dvL3JpZGUvdjE7cmlkZXYxogIDR1JYqgIQR2VvZmxlZXQuUmlkZS5WMcoCEEdlb2ZsZWV0XFJpZGVcVjHiAhxHZW9mbGVldFxSaWRlXFYxXEdQQk1ldGFkYXRh6gISR2VvZmxlZXQ6OlJpZGU6OlYxYgZwcm90bzM", [file_common_v1_common, file_google_protobuf_timestamp]);
+  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEiHgoLUmlkZVJlcXVlc3QSDwoHcmlkZV9pZBgBIAEoCSKHBAoQUmlkZVN0YXR1c1VwZGF0ZRIPCgdyaWRlX2lkGAEgASgJEhQKDHBhc3Nlbmdlcl9pZBgCIAEoCRIRCglkcml2ZXJfaWQYAyABKAkSMAoMcGlja3VwX3BvaW50GAQgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIxCg1kcm9wb2ZmX3BvaW50GAUgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxI0ChBjdXJyZW50X2xvY2F0aW9uGAYgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIxCgtyaWRlX3N0YXR1cxgHIAEoDjIcLmdlb2ZsZWV0LnJpZGUudjEuUmlkZVN0YXR1cxIVCg1lc3RpbWF0ZV9mYXJlGAggASgCEhIKCmZpbmFsX2ZhcmUYCSABKAISEAoIY3VycmVuY3kYCiABKAkSNwoOcGF5bWVudF9tZXRob2QYCyABKA4yHy5nZW9mbGVldC5yaWRlLnYxLlBheW1lbnRNZXRob2QSFQoNY2FuY2VsX3JlYXNvbhgMIAEoCRIuCgpjcmVhdGVkX2F0GA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GA4gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCItChlUcmFja011bHRpcGxlUmlkZXNSZXF1ZXN0EhAKCHJpZGVfaWRzGAEgAygJIrABChpUcmFja011bHRpcGxlUmlkZXNSZXNwb25zZRIPCgdyaWRlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSEQoJZHJpdmVyX2lkGAMgASgJEjQKEGN1cnJlbnRfbG9jYXRpb24YBCABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nEhcKD2VzdGltYXRlZF9wcmljZRgFIAEoARIOCgZzdGF0dXMYBiABKAkq4gEKClJpZGVTdGF0dXMSGwoXUklERV9TVEFUVVNfVU5TUEVDSUZJRUQQABIXChNSSURFX1NUQVRVU19DUkVBVEVEEAESGAoUUklERV9TVEFUVVNfTUFUQ0hJTkcQAhIYChRSSURFX1NUQVRVU19BQ0NFUFRFRBADEhcKE1JJREVfU1RBVFVTX0FSUklWRUQQBBIbChdSSURFX1NUQVRVU19JTl9QUk9HUkVTUxAFEhkKFVJJREVfU1RBVFVTX0NPTVBMRVRFRBAGEhkKFVJJREVfU1RBVFVTX0NBTkNFTExFRBAHKnwKDVBheW1lbnRNZXRob2QSHgoaUEFZTUVOVF9NRVRIT0RfVU5TUEVDSUZJRUQQABIXChNQQVlNRU5UX01FVEhPRF9DQVNIEAESGQoVUEFZTUVOVF9NRVRIT0RfV0FMTEVUEAISFwoTUEFZTUVOVF9NRVRIT0RfQ0FSRBADMtQBCgtSaWRlU2VydmljZRJxChJUcmFja011bHRpcGxlUmlkZXMSKy5nZW9mbGVldC5yaWRlLnYxLlRyYWNrTXVsdGlwbGVSaWRlc1JlcXVlc3QaLC5nZW9mbGVldC5yaWRlLnYxLlRyYWNrTXVsdGlwbGVSaWRlc1Jlc3BvbnNlMAESUgoLUmVxdWVzdFJpZGUSHS5nZW9mbGVldC5yaWRlLnYxLlJpZGVSZXF1ZXN0GiIuZ2VvZmxlZXQucmlkZS52MS5SaWRlU3RhdHVzVXBkYXRlMAFCvwEKFGNvbS5nZW9mbGVldC5yaWRlLnYxQglSaWRlUHJvdG9QAVo6Z2l0aHViLmNvbS9kdWN0aGFuZ25nL2dlb2ZsZWV0LXByb3RvL2dlbi9nby9yaWRlL3YxO3JpZGV2MaICA0dSWKoCEEdlb2ZsZWV0LlJpZGUuVjHKAhBHZW9mbGVldFxSaWRlXFYx4gIcR2VvZmxlZXRcUmlkZVxWMVxHUEJNZXRhZGF0YeoCEkdlb2ZsZWV0OjpSaWRlOjpWMWIGcHJvdG8z", [file_common_v1_common, file_google_protobuf_timestamp]);
 
 /**
- * @generated from message geofleet.ride.v1.RequestRideRequest
+ * @generated from message geofleet.ride.v1.RideRequest
  */
-export type RequestRideRequest = Message<"geofleet.ride.v1.RequestRideRequest"> & {
+export type RideRequest = Message<"geofleet.ride.v1.RideRequest"> & {
   /**
    * @generated from field: string ride_id = 1;
    */
@@ -27,16 +27,16 @@ export type RequestRideRequest = Message<"geofleet.ride.v1.RequestRideRequest"> 
 };
 
 /**
- * Describes the message geofleet.ride.v1.RequestRideRequest.
- * Use `create(RequestRideRequestSchema)` to create a new message.
+ * Describes the message geofleet.ride.v1.RideRequest.
+ * Use `create(RideRequestSchema)` to create a new message.
  */
-export const RequestRideRequestSchema: GenMessage<RequestRideRequest> = /*@__PURE__*/
+export const RideRequestSchema: GenMessage<RideRequest> = /*@__PURE__*/
   messageDesc(file_ride_v1_ride, 0);
 
 /**
- * @generated from message geofleet.ride.v1.RequestRideResponse
+ * @generated from message geofleet.ride.v1.RideStatusUpdate
  */
-export type RequestRideResponse = Message<"geofleet.ride.v1.RequestRideResponse"> & {
+export type RideStatusUpdate = Message<"geofleet.ride.v1.RideStatusUpdate"> & {
   /**
    * @generated from field: string ride_id = 1;
    */
@@ -109,10 +109,10 @@ export type RequestRideResponse = Message<"geofleet.ride.v1.RequestRideResponse"
 };
 
 /**
- * Describes the message geofleet.ride.v1.RequestRideResponse.
- * Use `create(RequestRideResponseSchema)` to create a new message.
+ * Describes the message geofleet.ride.v1.RideStatusUpdate.
+ * Use `create(RideStatusUpdateSchema)` to create a new message.
  */
-export const RequestRideResponseSchema: GenMessage<RequestRideResponse> = /*@__PURE__*/
+export const RideStatusUpdateSchema: GenMessage<RideStatusUpdate> = /*@__PURE__*/
   messageDesc(file_ride_v1_ride, 1);
 
 /**
@@ -297,8 +297,8 @@ export const RideService: GenService<{
    */
   requestRide: {
     methodKind: "server_streaming";
-    input: typeof RequestRideRequestSchema;
-    output: typeof RequestRideResponseSchema;
+    input: typeof RideRequestSchema;
+    output: typeof RideStatusUpdateSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_ride_v1_ride, 0);
