@@ -12,7 +12,7 @@ service RideService {
     rpc TrackMultipleRides(TrackMultipleRidesRequest) returns (stream TrackMultipleRidesResponse);
 
     // Stream from server to clients - can be user / driver / or server admins
-    rpc RequestRide(RequestRideRequest) returns (stream RequestRideResponse);
+    rpc RequestRide(RequestRideRequest) returns (RequestRideResponse);
 }
 
 enum RideStatus {
