@@ -13,7 +13,11 @@ service RideService {
 
     // Stream from server to clients - can be user / driver / or server admins
     rpc RequestRide(RequestRideRequest) returns (RequestRideResponse);
+
+    // Listen to the dispatcher of the ride_service
+    rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (stream SubscribeRideUpdateResponse);
 }
+
 
 enum RideStatus {
     RIDE_STATUS_UNSPECIFIED = 0; // Giá trị mặc định
@@ -31,6 +35,17 @@ enum PaymentMethod {
     PAYMENT_METHOD_CASH = 1;
     PAYMENT_METHOD_WALLET = 2;
     PAYMENT_METHOD_CARD = 3;
+}
+
+message SubscribeRideUpdateRequest {
+    string ride_id = 1;
+    string user_id = 2;
+}
+
+message SubscribeRideUpdateResponse {
+    string ride_id = 1;
+    RideStatus ride_status = 2;
+    google.protobuf.Timestamp last_updated = 3;
 }
 
 message RequestRideRequest {
