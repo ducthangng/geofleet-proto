@@ -89,11 +89,11 @@
         },
         "durationInSecond": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "totalTravelDistanceM": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         }
       }
     },
