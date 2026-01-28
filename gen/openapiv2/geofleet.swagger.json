@@ -86,6 +86,14 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/v1UniversalRideResponse"
+        },
+        "durationInSecond": {
+          "type": "number",
+          "format": "float"
+        },
+        "totalTravelDistanceM": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
