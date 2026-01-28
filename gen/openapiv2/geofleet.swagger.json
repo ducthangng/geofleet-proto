@@ -51,11 +51,35 @@
         }
       }
     },
+    "v1AcceptRideResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/v1UniversalRideResponse"
+        }
+      }
+    },
+    "v1CancelRideResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/v1UniversalRideResponse"
+        }
+      }
+    },
     "v1CheckDuplicatedPhoneResponse": {
       "type": "object",
       "properties": {
         "isDuplicated": {
           "type": "boolean"
+        }
+      }
+    },
+    "v1CompleteRideResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/v1UniversalRideResponse"
         }
       }
     },
@@ -198,6 +222,14 @@
       "default": "RIDE_STATUS_UNSPECIFIED",
       "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
     },
+    "v1StartRideResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/v1UniversalRideResponse"
+        }
+      }
+    },
     "v1SubscribeRideUpdateResponse": {
       "type": "object",
       "properties": {
@@ -235,6 +267,32 @@
         "status": {
           "type": "string",
           "title": "e.g., ON_TRIP, PICKING_UP"
+        }
+      }
+    },
+    "v1UniversalRideRequest": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1UniversalRideResponse": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
         }
       }
     },

@@ -6,6 +6,8 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
 import type { LatLng } from "../../common/v1/common_pb";
 import { file_common_v1_common } from "../../common/v1/common_pb";
+import type { UserRole } from "../../identity/v1/user_pb";
+import { file_identity_v1_user } from "../../identity/v1/user_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
@@ -14,7 +16,209 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file ride/v1/ride.proto.
  */
 export const file_ride_v1_ride: GenFile = /*@__PURE__*/
-  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEiPgoaU3Vic2NyaWJlUmlkZVVwZGF0ZVJlcXVlc3QSDwoHcmlkZV9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJIpMBChtTdWJzY3JpYmVSaWRlVXBkYXRlUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIxCgtyaWRlX3N0YXR1cxgCIAEoDjIcLmdlb2ZsZWV0LnJpZGUudjEuUmlkZVN0YXR1cxIwCgxsYXN0X3VwZGF0ZWQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wItwCChJSZXF1ZXN0UmlkZVJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIwCgxwaWNrdXBfcG9pbnQYAiABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nEjEKDWRyb3BvZmZfcG9pbnQYAyABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nEjQKEGN1cnJlbnRfbG9jYXRpb24YBCABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nEjcKDnBheW1lbnRfbWV0aG9kGAUgASgOMh8uZ2VvZmxlZXQucmlkZS52MS5QYXltZW50TWV0aG9kEjEKC3JpZGVfc3RhdHVzGAYgASgOMhwuZ2VvZmxlZXQucmlkZS52MS5SaWRlU3RhdHVzEi4KCmNyZWF0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIo0CChNSZXF1ZXN0UmlkZVJlc3BvbnNlEg8KB3JpZGVfaWQYASABKAkSFAoMcGFzc2VuZ2VyX2lkGAIgASgJEhEKCWRyaXZlcl9pZBgDIAEoCRIVCg1lc3RpbWF0ZV9mYXJlGAQgASgCEhIKCmZpbmFsX2ZhcmUYBSABKAISMQoLcmlkZV9zdGF0dXMYBiABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMSLgoKY3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLQoZVHJhY2tNdWx0aXBsZVJpZGVzUmVxdWVzdBIQCghyaWRlX2lkcxgBIAMoCSKwAQoaVHJhY2tNdWx0aXBsZVJpZGVzUmVzcG9uc2USDwoHcmlkZV9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEhEKCWRyaXZlcl9pZBgDIAEoCRI0ChBjdXJyZW50X2xvY2F0aW9uGAQgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIXCg9lc3RpbWF0ZWRfcHJpY2UYBSABKAESDgoGc3RhdHVzGAYgASgJKuIBCgpSaWRlU3RhdHVzEhsKF1JJREVfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTUklERV9TVEFUVVNfQ1JFQVRFRBABEhgKFFJJREVfU1RBVFVTX01BVENISU5HEAISGAoUUklERV9TVEFUVVNfQUNDRVBURUQQAxIXChNSSURFX1NUQVRVU19BUlJJVkVEEAQSGwoXUklERV9TVEFUVVNfSU5fUFJPR1JFU1MQBRIZChVSSURFX1NUQVRVU19DT01QTEVURUQQBhIZChVSSURFX1NUQVRVU19DQU5DRUxMRUQQByp8Cg1QYXltZW50TWV0aG9kEh4KGlBBWU1FTlRfTUVUSE9EX1VOU1BFQ0lGSUVEEAASFwoTUEFZTUVOVF9NRVRIT0RfQ0FTSBABEhkKFVBBWU1FTlRfTUVUSE9EX1dBTExFVBACEhcKE1BBWU1FTlRfTUVUSE9EX0NBUkQQAzLSAgoLUmlkZVNlcnZpY2UScQoSVHJhY2tNdWx0aXBsZVJpZGVzEisuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXF1ZXN0GiwuZ2VvZmxlZXQucmlkZS52MS5UcmFja011bHRpcGxlUmlkZXNSZXNwb25zZTABEloKC1JlcXVlc3RSaWRlEiQuZ2VvZmxlZXQucmlkZS52MS5SZXF1ZXN0UmlkZVJlcXVlc3QaJS5nZW9mbGVldC5yaWRlLnYxLlJlcXVlc3RSaWRlUmVzcG9uc2USdAoTU3Vic2NyaWJlUmlkZVVwZGF0ZRIsLmdlb2ZsZWV0LnJpZGUudjEuU3Vic2NyaWJlUmlkZVVwZGF0ZVJlcXVlc3QaLS5nZW9mbGVldC5yaWRlLnYxLlN1YnNjcmliZVJpZGVVcGRhdGVSZXNwb25zZTABQr8BChRjb20uZ2VvZmxlZXQucmlkZS52MUIJUmlkZVByb3RvUAFaOmdpdGh1Yi5jb20vZHVjdGhhbmduZy9nZW9mbGVldC1wcm90by9nZW4vZ28vcmlkZS92MTtyaWRldjGiAgNHUliqAhBHZW9mbGVldC5SaWRlLlYxygIQR2VvZmxlZXRcUmlkZVxWMeICHEdlb2ZsZWV0XFJpZGVcVjFcR1BCTWV0YWRhdGHqAhJHZW9mbGVldDo6UmlkZTo6VjFiBnByb3RvMw", [file_common_v1_common, file_google_protobuf_timestamp]);
+  fileDesc("ChJyaWRlL3YxL3JpZGUucHJvdG8SEGdlb2ZsZWV0LnJpZGUudjEijQEKFFVuaXZlcnNhbFJpZGVSZXF1ZXN0Eg8KB3JpZGVfaWQYASABKAkSNAoQY3VycmVudF9sb2NhdGlvbhgDIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSLgoKY3JlYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiWwoVVW5pdmVyc2FsUmlkZVJlc3BvbnNlEg8KB3JpZGVfaWQYASABKAkSMQoLcmlkZV9zdGF0dXMYAiABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMiSgoRQWNjZXB0UmlkZVJlcXVlc3QSNQoFdmFsdWUYASABKAsyJi5nZW9mbGVldC5yaWRlLnYxLlVuaXZlcnNhbFJpZGVSZXF1ZXN0IkwKEkFjY2VwdFJpZGVSZXNwb25zZRI2CgV2YWx1ZRgBIAEoCzInLmdlb2ZsZWV0LnJpZGUudjEuVW5pdmVyc2FsUmlkZVJlc3BvbnNlIkkKEFN0YXJ0UmlkZVJlcXVlc3QSNQoFdmFsdWUYASABKAsyJi5nZW9mbGVldC5yaWRlLnYxLlVuaXZlcnNhbFJpZGVSZXF1ZXN0IksKEVN0YXJ0UmlkZVJlc3BvbnNlEjYKBXZhbHVlGAEgASgLMicuZ2VvZmxlZXQucmlkZS52MS5Vbml2ZXJzYWxSaWRlUmVzcG9uc2UingEKEUNhbmNlbFJpZGVSZXF1ZXN0EjUKBXZhbHVlGAEgASgLMiYuZ2VvZmxlZXQucmlkZS52MS5Vbml2ZXJzYWxSaWRlUmVxdWVzdBIOCgZyZWFzb24YAiABKAkSDwoHdXNlcl9pZBgDIAEoCRIxCgl1c2VyX3JvbGUYBCABKA4yHi5nZW9mbGVldC5pZGVudGl0eS52MS5Vc2VyUm9sZSJMChJDYW5jZWxSaWRlUmVzcG9uc2USNgoFdmFsdWUYASABKAsyJy5nZW9mbGVldC5yaWRlLnYxLlVuaXZlcnNhbFJpZGVSZXNwb25zZSJMChNDb21wbGV0ZVJpZGVSZXF1ZXN0EjUKBXZhbHVlGAEgASgLMiYuZ2VvZmxlZXQucmlkZS52MS5Vbml2ZXJzYWxSaWRlUmVxdWVzdCJOChRDb21wbGV0ZVJpZGVSZXNwb25zZRI2CgV2YWx1ZRgBIAEoCzInLmdlb2ZsZWV0LnJpZGUudjEuVW5pdmVyc2FsUmlkZVJlc3BvbnNlIj4KGlN1YnNjcmliZVJpZGVVcGRhdGVSZXF1ZXN0Eg8KB3JpZGVfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCSKTAQobU3Vic2NyaWJlUmlkZVVwZGF0ZVJlc3BvbnNlEg8KB3JpZGVfaWQYASABKAkSMQoLcmlkZV9zdGF0dXMYAiABKA4yHC5nZW9mbGVldC5yaWRlLnYxLlJpZGVTdGF0dXMSMAoMbGFzdF91cGRhdGVkGAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCLcAgoSUmVxdWVzdFJpZGVSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkSMAoMcGlja3VwX3BvaW50GAIgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxIxCg1kcm9wb2ZmX3BvaW50GAMgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxI0ChBjdXJyZW50X2xvY2F0aW9uGAQgASgLMhouZ2VvZmxlZXQuY29tbW9uLnYxLkxhdExuZxI3Cg5wYXltZW50X21ldGhvZBgFIAEoDjIfLmdlb2ZsZWV0LnJpZGUudjEuUGF5bWVudE1ldGhvZBIxCgtyaWRlX3N0YXR1cxgGIAEoDjIcLmdlb2ZsZWV0LnJpZGUudjEuUmlkZVN0YXR1cxIuCgpjcmVhdGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKNAgoTUmVxdWVzdFJpZGVSZXNwb25zZRIPCgdyaWRlX2lkGAEgASgJEhQKDHBhc3Nlbmdlcl9pZBgCIAEoCRIRCglkcml2ZXJfaWQYAyABKAkSFQoNZXN0aW1hdGVfZmFyZRgEIAEoAhISCgpmaW5hbF9mYXJlGAUgASgCEjEKC3JpZGVfc3RhdHVzGAYgASgOMhwuZ2VvZmxlZXQucmlkZS52MS5SaWRlU3RhdHVzEi4KCmNyZWF0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIi0KGVRyYWNrTXVsdGlwbGVSaWRlc1JlcXVlc3QSEAoIcmlkZV9pZHMYASADKAkisAEKGlRyYWNrTXVsdGlwbGVSaWRlc1Jlc3BvbnNlEg8KB3JpZGVfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIRCglkcml2ZXJfaWQYAyABKAkSNAoQY3VycmVudF9sb2NhdGlvbhgEIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSFwoPZXN0aW1hdGVkX3ByaWNlGAUgASgBEg4KBnN0YXR1cxgGIAEoCSriAQoKUmlkZVN0YXR1cxIbChdSSURFX1NUQVRVU19VTlNQRUNJRklFRBAAEhcKE1JJREVfU1RBVFVTX0NSRUFURUQQARIYChRSSURFX1NUQVRVU19NQVRDSElORxACEhgKFFJJREVfU1RBVFVTX0FDQ0VQVEVEEAMSFwoTUklERV9TVEFUVVNfQVJSSVZFRBAEEhsKF1JJREVfU1RBVFVTX0lOX1BST0dSRVNTEAUSGQoVUklERV9TVEFUVVNfQ09NUExFVEVEEAYSGQoVUklERV9TVEFUVVNfQ0FOQ0VMTEVEEAcqfAoNUGF5bWVudE1ldGhvZBIeChpQQVlNRU5UX01FVEhPRF9VTlNQRUNJRklFRBAAEhcKE1BBWU1FTlRfTUVUSE9EX0NBU0gQARIZChVQQVlNRU5UX01FVEhPRF9XQUxMRVQQAhIXChNQQVlNRU5UX01FVEhPRF9DQVJEEAMyuQUKC1JpZGVTZXJ2aWNlEnEKElRyYWNrTXVsdGlwbGVSaWRlcxIrLmdlb2ZsZWV0LnJpZGUudjEuVHJhY2tNdWx0aXBsZVJpZGVzUmVxdWVzdBosLmdlb2ZsZWV0LnJpZGUudjEuVHJhY2tNdWx0aXBsZVJpZGVzUmVzcG9uc2UwARJaCgtSZXF1ZXN0UmlkZRIkLmdlb2ZsZWV0LnJpZGUudjEuUmVxdWVzdFJpZGVSZXF1ZXN0GiUuZ2VvZmxlZXQucmlkZS52MS5SZXF1ZXN0UmlkZVJlc3BvbnNlEnQKE1N1YnNjcmliZVJpZGVVcGRhdGUSLC5nZW9mbGVldC5yaWRlLnYxLlN1YnNjcmliZVJpZGVVcGRhdGVSZXF1ZXN0Gi0uZ2VvZmxlZXQucmlkZS52MS5TdWJzY3JpYmVSaWRlVXBkYXRlUmVzcG9uc2UwARJXCgpBY2NlcHRSaWRlEiMuZ2VvZmxlZXQucmlkZS52MS5BY2NlcHRSaWRlUmVxdWVzdBokLmdlb2ZsZWV0LnJpZGUudjEuQWNjZXB0UmlkZVJlc3BvbnNlElQKCVN0YXJ0UmlkZRIiLmdlb2ZsZWV0LnJpZGUudjEuU3RhcnRSaWRlUmVxdWVzdBojLmdlb2ZsZWV0LnJpZGUudjEuU3RhcnRSaWRlUmVzcG9uc2USVwoKQ2FuY2VsUmlkZRIjLmdlb2ZsZWV0LnJpZGUudjEuQ2FuY2VsUmlkZVJlcXVlc3QaJC5nZW9mbGVldC5yaWRlLnYxLkNhbmNlbFJpZGVSZXNwb25zZRJdCgxDb21wbGV0ZVJpZGUSJS5nZW9mbGVldC5yaWRlLnYxLkNvbXBsZXRlUmlkZVJlcXVlc3QaJi5nZW9mbGVldC5yaWRlLnYxLkNvbXBsZXRlUmlkZVJlc3BvbnNlQr8BChRjb20uZ2VvZmxlZXQucmlkZS52MUIJUmlkZVByb3RvUAFaOmdpdGh1Yi5jb20vZHVjdGhhbmduZy9nZW9mbGVldC1wcm90by9nZW4vZ28vcmlkZS92MTtyaWRldjGiAgNHUliqAhBHZW9mbGVldC5SaWRlLlYxygIQR2VvZmxlZXRcUmlkZVxWMeICHEdlb2ZsZWV0XFJpZGVcVjFcR1BCTWV0YWRhdGHqAhJHZW9mbGVldDo6UmlkZTo6VjFiBnByb3RvMw", [file_common_v1_common, file_identity_v1_user, file_google_protobuf_timestamp]);
+
+/**
+ * @generated from message geofleet.ride.v1.UniversalRideRequest
+ */
+export type UniversalRideRequest = Message<"geofleet.ride.v1.UniversalRideRequest"> & {
+  /**
+   * @generated from field: string ride_id = 1;
+   */
+  rideId: string;
+
+  /**
+   * @generated from field: geofleet.common.v1.LatLng current_location = 3;
+   */
+  currentLocation?: LatLng;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.UniversalRideRequest.
+ * Use `create(UniversalRideRequestSchema)` to create a new message.
+ */
+export const UniversalRideRequestSchema: GenMessage<UniversalRideRequest> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 0);
+
+/**
+ * @generated from message geofleet.ride.v1.UniversalRideResponse
+ */
+export type UniversalRideResponse = Message<"geofleet.ride.v1.UniversalRideResponse"> & {
+  /**
+   * @generated from field: string ride_id = 1;
+   */
+  rideId: string;
+
+  /**
+   * @generated from field: geofleet.ride.v1.RideStatus ride_status = 2;
+   */
+  rideStatus: RideStatus;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.UniversalRideResponse.
+ * Use `create(UniversalRideResponseSchema)` to create a new message.
+ */
+export const UniversalRideResponseSchema: GenMessage<UniversalRideResponse> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 1);
+
+/**
+ * @generated from message geofleet.ride.v1.AcceptRideRequest
+ */
+export type AcceptRideRequest = Message<"geofleet.ride.v1.AcceptRideRequest"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideRequest value = 1;
+   */
+  value?: UniversalRideRequest;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.AcceptRideRequest.
+ * Use `create(AcceptRideRequestSchema)` to create a new message.
+ */
+export const AcceptRideRequestSchema: GenMessage<AcceptRideRequest> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 2);
+
+/**
+ * @generated from message geofleet.ride.v1.AcceptRideResponse
+ */
+export type AcceptRideResponse = Message<"geofleet.ride.v1.AcceptRideResponse"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideResponse value = 1;
+   */
+  value?: UniversalRideResponse;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.AcceptRideResponse.
+ * Use `create(AcceptRideResponseSchema)` to create a new message.
+ */
+export const AcceptRideResponseSchema: GenMessage<AcceptRideResponse> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 3);
+
+/**
+ * @generated from message geofleet.ride.v1.StartRideRequest
+ */
+export type StartRideRequest = Message<"geofleet.ride.v1.StartRideRequest"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideRequest value = 1;
+   */
+  value?: UniversalRideRequest;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.StartRideRequest.
+ * Use `create(StartRideRequestSchema)` to create a new message.
+ */
+export const StartRideRequestSchema: GenMessage<StartRideRequest> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 4);
+
+/**
+ * @generated from message geofleet.ride.v1.StartRideResponse
+ */
+export type StartRideResponse = Message<"geofleet.ride.v1.StartRideResponse"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideResponse value = 1;
+   */
+  value?: UniversalRideResponse;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.StartRideResponse.
+ * Use `create(StartRideResponseSchema)` to create a new message.
+ */
+export const StartRideResponseSchema: GenMessage<StartRideResponse> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 5);
+
+/**
+ * @generated from message geofleet.ride.v1.CancelRideRequest
+ */
+export type CancelRideRequest = Message<"geofleet.ride.v1.CancelRideRequest"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideRequest value = 1;
+   */
+  value?: UniversalRideRequest;
+
+  /**
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+
+  /**
+   * who?
+   *
+   * @generated from field: string user_id = 3;
+   */
+  userId: string;
+
+  /**
+   * @generated from field: geofleet.identity.v1.UserRole user_role = 4;
+   */
+  userRole: UserRole;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.CancelRideRequest.
+ * Use `create(CancelRideRequestSchema)` to create a new message.
+ */
+export const CancelRideRequestSchema: GenMessage<CancelRideRequest> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 6);
+
+/**
+ * @generated from message geofleet.ride.v1.CancelRideResponse
+ */
+export type CancelRideResponse = Message<"geofleet.ride.v1.CancelRideResponse"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideResponse value = 1;
+   */
+  value?: UniversalRideResponse;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.CancelRideResponse.
+ * Use `create(CancelRideResponseSchema)` to create a new message.
+ */
+export const CancelRideResponseSchema: GenMessage<CancelRideResponse> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 7);
+
+/**
+ * @generated from message geofleet.ride.v1.CompleteRideRequest
+ */
+export type CompleteRideRequest = Message<"geofleet.ride.v1.CompleteRideRequest"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideRequest value = 1;
+   */
+  value?: UniversalRideRequest;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.CompleteRideRequest.
+ * Use `create(CompleteRideRequestSchema)` to create a new message.
+ */
+export const CompleteRideRequestSchema: GenMessage<CompleteRideRequest> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 8);
+
+/**
+ * @generated from message geofleet.ride.v1.CompleteRideResponse
+ */
+export type CompleteRideResponse = Message<"geofleet.ride.v1.CompleteRideResponse"> & {
+  /**
+   * @generated from field: geofleet.ride.v1.UniversalRideResponse value = 1;
+   */
+  value?: UniversalRideResponse;
+};
+
+/**
+ * Describes the message geofleet.ride.v1.CompleteRideResponse.
+ * Use `create(CompleteRideResponseSchema)` to create a new message.
+ */
+export const CompleteRideResponseSchema: GenMessage<CompleteRideResponse> = /*@__PURE__*/
+  messageDesc(file_ride_v1_ride, 9);
 
 /**
  * @generated from message geofleet.ride.v1.SubscribeRideUpdateRequest
@@ -36,7 +240,7 @@ export type SubscribeRideUpdateRequest = Message<"geofleet.ride.v1.SubscribeRide
  * Use `create(SubscribeRideUpdateRequestSchema)` to create a new message.
  */
 export const SubscribeRideUpdateRequestSchema: GenMessage<SubscribeRideUpdateRequest> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 0);
+  messageDesc(file_ride_v1_ride, 10);
 
 /**
  * @generated from message geofleet.ride.v1.SubscribeRideUpdateResponse
@@ -63,7 +267,7 @@ export type SubscribeRideUpdateResponse = Message<"geofleet.ride.v1.SubscribeRid
  * Use `create(SubscribeRideUpdateResponseSchema)` to create a new message.
  */
 export const SubscribeRideUpdateResponseSchema: GenMessage<SubscribeRideUpdateResponse> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 1);
+  messageDesc(file_ride_v1_ride, 11);
 
 /**
  * @generated from message geofleet.ride.v1.RequestRideRequest
@@ -110,7 +314,7 @@ export type RequestRideRequest = Message<"geofleet.ride.v1.RequestRideRequest"> 
  * Use `create(RequestRideRequestSchema)` to create a new message.
  */
 export const RequestRideRequestSchema: GenMessage<RequestRideRequest> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 2);
+  messageDesc(file_ride_v1_ride, 12);
 
 /**
  * @generated from message geofleet.ride.v1.RequestRideResponse
@@ -164,7 +368,7 @@ export type RequestRideResponse = Message<"geofleet.ride.v1.RequestRideResponse"
  * Use `create(RequestRideResponseSchema)` to create a new message.
  */
 export const RequestRideResponseSchema: GenMessage<RequestRideResponse> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 3);
+  messageDesc(file_ride_v1_ride, 13);
 
 /**
  * @generated from message geofleet.ride.v1.TrackMultipleRidesRequest
@@ -181,7 +385,7 @@ export type TrackMultipleRidesRequest = Message<"geofleet.ride.v1.TrackMultipleR
  * Use `create(TrackMultipleRidesRequestSchema)` to create a new message.
  */
 export const TrackMultipleRidesRequestSchema: GenMessage<TrackMultipleRidesRequest> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 4);
+  messageDesc(file_ride_v1_ride, 14);
 
 /**
  * @generated from message geofleet.ride.v1.TrackMultipleRidesResponse
@@ -225,7 +429,7 @@ export type TrackMultipleRidesResponse = Message<"geofleet.ride.v1.TrackMultiple
  * Use `create(TrackMultipleRidesResponseSchema)` to create a new message.
  */
 export const TrackMultipleRidesResponseSchema: GenMessage<TrackMultipleRidesResponse> = /*@__PURE__*/
-  messageDesc(file_ride_v1_ride, 5);
+  messageDesc(file_ride_v1_ride, 15);
 
 /**
  * @generated from enum geofleet.ride.v1.RideStatus
@@ -360,6 +564,46 @@ export const RideService: GenService<{
     methodKind: "server_streaming";
     input: typeof SubscribeRideUpdateRequestSchema;
     output: typeof SubscribeRideUpdateResponseSchema;
+  },
+  /**
+   * This is when the Driver accepts the ride
+   *
+   * @generated from rpc geofleet.ride.v1.RideService.AcceptRide
+   */
+  acceptRide: {
+    methodKind: "unary";
+    input: typeof AcceptRideRequestSchema;
+    output: typeof AcceptRideResponseSchema;
+  },
+  /**
+   * This is when the Driver start the ride
+   *
+   * @generated from rpc geofleet.ride.v1.RideService.StartRide
+   */
+  startRide: {
+    methodKind: "unary";
+    input: typeof StartRideRequestSchema;
+    output: typeof StartRideResponseSchema;
+  },
+  /**
+   * This is when either of users accept the ride
+   *
+   * @generated from rpc geofleet.ride.v1.RideService.CancelRide
+   */
+  cancelRide: {
+    methodKind: "unary";
+    input: typeof CancelRideRequestSchema;
+    output: typeof CancelRideResponseSchema;
+  },
+  /**
+   * This is when the driver complete the ride
+   *
+   * @generated from rpc geofleet.ride.v1.RideService.CompleteRide
+   */
+  completeRide: {
+    methodKind: "unary";
+    input: typeof CompleteRideRequestSchema;
+    output: typeof CompleteRideResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_ride_v1_ride, 0);

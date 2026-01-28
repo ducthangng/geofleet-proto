@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package geofleet.ride.v1;
 import "common/v1/common.proto"; // Import LatLng
+import "identity/v1/user.proto"; // Import LatLng
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/ducthangng/geofleet-proto/gen/go/geofleet/ride/v1;ridev1";
@@ -16,6 +17,18 @@ service RideService {
 
     // Listen to the dispatcher of the ride_service
     rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (stream SubscribeRideUpdateResponse);
+
+    // This is when the Driver accepts the ride
+    rpc AcceptRide(AcceptRideRequest) returns (AcceptRideResponse);
+
+    // This is when the Driver start the ride
+    rpc StartRide(StartRideRequest) returns (StartRideResponse);
+
+    // This is when either of users accept the ride
+    rpc CancelRide(CancelRideRequest) returns (CancelRideResponse);
+
+    // This is when the driver complete the ride
+    rpc CompleteRide(CompleteRideRequest) returns (CompleteRideResponse);
 }
 
 
@@ -35,6 +48,53 @@ enum PaymentMethod {
     PAYMENT_METHOD_CASH = 1;
     PAYMENT_METHOD_WALLET = 2;
     PAYMENT_METHOD_CARD = 3;
+}
+
+
+message UniversalRideRequest {
+    string ride_id = 1;
+    geofleet.common.v1.LatLng current_location = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+
+message UniversalRideResponse {
+    string ride_id = 1;
+    RideStatus ride_status = 2;   
+}
+
+message AcceptRideRequest {
+    UniversalRideRequest value = 1;
+}
+
+message AcceptRideResponse {
+    UniversalRideResponse value = 1;
+}
+
+message StartRideRequest {
+    UniversalRideRequest value = 1;
+}
+
+message StartRideResponse {
+    UniversalRideResponse value = 1;
+}
+
+message CancelRideRequest {
+    UniversalRideRequest value = 1;
+    string reason = 2;
+    string user_id = 3; // who?
+    geofleet.identity.v1.UserRole user_role = 4; 
+}
+
+message CancelRideResponse {
+    UniversalRideResponse value = 1;
+}
+
+message CompleteRideRequest {
+    UniversalRideRequest value = 1;
+}
+
+message CompleteRideResponse {
+    UniversalRideResponse value = 1;
 }
 
 message SubscribeRideUpdateRequest {

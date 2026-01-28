@@ -22,6 +22,10 @@ const (
 	RideService_TrackMultipleRides_FullMethodName  = "/geofleet.ride.v1.RideService/TrackMultipleRides"
 	RideService_RequestRide_FullMethodName         = "/geofleet.ride.v1.RideService/RequestRide"
 	RideService_SubscribeRideUpdate_FullMethodName = "/geofleet.ride.v1.RideService/SubscribeRideUpdate"
+	RideService_AcceptRide_FullMethodName          = "/geofleet.ride.v1.RideService/AcceptRide"
+	RideService_StartRide_FullMethodName           = "/geofleet.ride.v1.RideService/StartRide"
+	RideService_CancelRide_FullMethodName          = "/geofleet.ride.v1.RideService/CancelRide"
+	RideService_CompleteRide_FullMethodName        = "/geofleet.ride.v1.RideService/CompleteRide"
 )
 
 // RideServiceClient is the client API for RideService service.
@@ -36,6 +40,14 @@ type RideServiceClient interface {
 	RequestRide(ctx context.Context, in *RequestRideRequest, opts ...grpc.CallOption) (*RequestRideResponse, error)
 	// Listen to the dispatcher of the ride_service
 	SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SubscribeRideUpdateResponse], error)
+	// This is when the Driver accepts the ride
+	AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error)
+	// This is when the Driver start the ride
+	StartRide(ctx context.Context, in *StartRideRequest, opts ...grpc.CallOption) (*StartRideResponse, error)
+	// This is when either of users accept the ride
+	CancelRide(ctx context.Context, in *CancelRideRequest, opts ...grpc.CallOption) (*CancelRideResponse, error)
+	// This is when the driver complete the ride
+	CompleteRide(ctx context.Context, in *CompleteRideRequest, opts ...grpc.CallOption) (*CompleteRideResponse, error)
 }
 
 type rideServiceClient struct {
@@ -94,6 +106,46 @@ func (c *rideServiceClient) SubscribeRideUpdate(ctx context.Context, in *Subscri
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_SubscribeRideUpdateClient = grpc.ServerStreamingClient[SubscribeRideUpdateResponse]
 
+func (c *rideServiceClient) AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcceptRideResponse)
+	err := c.cc.Invoke(ctx, RideService_AcceptRide_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rideServiceClient) StartRide(ctx context.Context, in *StartRideRequest, opts ...grpc.CallOption) (*StartRideResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartRideResponse)
+	err := c.cc.Invoke(ctx, RideService_StartRide_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rideServiceClient) CancelRide(ctx context.Context, in *CancelRideRequest, opts ...grpc.CallOption) (*CancelRideResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelRideResponse)
+	err := c.cc.Invoke(ctx, RideService_CancelRide_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rideServiceClient) CompleteRide(ctx context.Context, in *CompleteRideRequest, opts ...grpc.CallOption) (*CompleteRideResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CompleteRideResponse)
+	err := c.cc.Invoke(ctx, RideService_CompleteRide_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RideServiceServer is the server API for RideService service.
 // All implementations should embed UnimplementedRideServiceServer
 // for forward compatibility.
@@ -106,6 +158,14 @@ type RideServiceServer interface {
 	RequestRide(context.Context, *RequestRideRequest) (*RequestRideResponse, error)
 	// Listen to the dispatcher of the ride_service
 	SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error
+	// This is when the Driver accepts the ride
+	AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error)
+	// This is when the Driver start the ride
+	StartRide(context.Context, *StartRideRequest) (*StartRideResponse, error)
+	// This is when either of users accept the ride
+	CancelRide(context.Context, *CancelRideRequest) (*CancelRideResponse, error)
+	// This is when the driver complete the ride
+	CompleteRide(context.Context, *CompleteRideRequest) (*CompleteRideResponse, error)
 }
 
 // UnimplementedRideServiceServer should be embedded to have
@@ -123,6 +183,18 @@ func (UnimplementedRideServiceServer) RequestRide(context.Context, *RequestRideR
 }
 func (UnimplementedRideServiceServer) SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method SubscribeRideUpdate not implemented")
+}
+func (UnimplementedRideServiceServer) AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptRide not implemented")
+}
+func (UnimplementedRideServiceServer) StartRide(context.Context, *StartRideRequest) (*StartRideResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartRide not implemented")
+}
+func (UnimplementedRideServiceServer) CancelRide(context.Context, *CancelRideRequest) (*CancelRideResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelRide not implemented")
+}
+func (UnimplementedRideServiceServer) CompleteRide(context.Context, *CompleteRideRequest) (*CompleteRideResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteRide not implemented")
 }
 func (UnimplementedRideServiceServer) testEmbeddedByValue() {}
 
@@ -184,6 +256,78 @@ func _RideService_SubscribeRideUpdate_Handler(srv interface{}, stream grpc.Serve
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_SubscribeRideUpdateServer = grpc.ServerStreamingServer[SubscribeRideUpdateResponse]
 
+func _RideService_AcceptRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptRideRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RideServiceServer).AcceptRide(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_AcceptRide_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).AcceptRide(ctx, req.(*AcceptRideRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RideService_StartRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartRideRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RideServiceServer).StartRide(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_StartRide_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).StartRide(ctx, req.(*StartRideRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RideService_CancelRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelRideRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RideServiceServer).CancelRide(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_CancelRide_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).CancelRide(ctx, req.(*CancelRideRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RideService_CompleteRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CompleteRideRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RideServiceServer).CompleteRide(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_CompleteRide_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).CompleteRide(ctx, req.(*CompleteRideRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RideService_ServiceDesc is the grpc.ServiceDesc for RideService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -194,6 +338,22 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RequestRide",
 			Handler:    _RideService_RequestRide_Handler,
+		},
+		{
+			MethodName: "AcceptRide",
+			Handler:    _RideService_AcceptRide_Handler,
+		},
+		{
+			MethodName: "StartRide",
+			Handler:    _RideService_StartRide_Handler,
+		},
+		{
+			MethodName: "CancelRide",
+			Handler:    _RideService_CancelRide_Handler,
+		},
+		{
+			MethodName: "CompleteRide",
+			Handler:    _RideService_CompleteRide_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
