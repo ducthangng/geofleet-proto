@@ -64,6 +64,12 @@
       "properties": {
         "value": {
           "$ref": "#/definitions/v1UniversalRideResponse"
+        },
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "detail": {
+          "type": "string"
         }
       }
     },

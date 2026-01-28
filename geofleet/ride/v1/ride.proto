@@ -87,6 +87,8 @@ message CancelRideRequest {
 
 message CancelRideResponse {
     UniversalRideResponse value = 1;
+    bool is_success = 2;
+    string detail = 3;
 }
 
 message CompleteRideRequest {
