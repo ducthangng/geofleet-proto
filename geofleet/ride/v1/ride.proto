@@ -16,7 +16,7 @@ service RideService {
     rpc RequestRide(RequestRideRequest) returns (RequestRideResponse);
 
     // Listen to the dispatcher of the ride_service
-    rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (stream SubscribeRideUpdateResponse);
+    rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (SubscribeRideUpdateResponse);
 
     // This is when the Driver accepts the ride
     rpc AcceptRide(AcceptRideRequest) returns (AcceptRideResponse);

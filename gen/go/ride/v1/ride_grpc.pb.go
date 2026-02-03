@@ -39,7 +39,7 @@ type RideServiceClient interface {
 	// Stream from server to clients - can be user / driver / or server admins
 	RequestRide(ctx context.Context, in *RequestRideRequest, opts ...grpc.CallOption) (*RequestRideResponse, error)
 	// Listen to the dispatcher of the ride_service
-	SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SubscribeRideUpdateResponse], error)
+	SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (*SubscribeRideUpdateResponse, error)
 	// This is when the Driver accepts the ride
 	AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error)
 	// This is when the Driver start the ride
@@ -87,24 +87,15 @@ func (c *rideServiceClient) RequestRide(ctx context.Context, in *RequestRideRequ
 	return out, nil
 }
 
-func (c *rideServiceClient) SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SubscribeRideUpdateResponse], error) {
+func (c *rideServiceClient) SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (*SubscribeRideUpdateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &RideService_ServiceDesc.Streams[1], RideService_SubscribeRideUpdate_FullMethodName, cOpts...)
+	out := new(SubscribeRideUpdateResponse)
+	err := c.cc.Invoke(ctx, RideService_SubscribeRideUpdate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SubscribeRideUpdateRequest, SubscribeRideUpdateResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RideService_SubscribeRideUpdateClient = grpc.ServerStreamingClient[SubscribeRideUpdateResponse]
 
 func (c *rideServiceClient) AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -157,7 +148,7 @@ type RideServiceServer interface {
 	// Stream from server to clients - can be user / driver / or server admins
 	RequestRide(context.Context, *RequestRideRequest) (*RequestRideResponse, error)
 	// Listen to the dispatcher of the ride_service
-	SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error
+	SubscribeRideUpdate(context.Context, *SubscribeRideUpdateRequest) (*SubscribeRideUpdateResponse, error)
 	// This is when the Driver accepts the ride
 	AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error)
 	// This is when the Driver start the ride
@@ -181,8 +172,8 @@ func (UnimplementedRideServiceServer) TrackMultipleRides(*TrackMultipleRidesRequ
 func (UnimplementedRideServiceServer) RequestRide(context.Context, *RequestRideRequest) (*RequestRideResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RequestRide not implemented")
 }
-func (UnimplementedRideServiceServer) SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method SubscribeRideUpdate not implemented")
+func (UnimplementedRideServiceServer) SubscribeRideUpdate(context.Context, *SubscribeRideUpdateRequest) (*SubscribeRideUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubscribeRideUpdate not implemented")
 }
 func (UnimplementedRideServiceServer) AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptRide not implemented")
@@ -245,16 +236,23 @@ func _RideService_RequestRide_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RideService_SubscribeRideUpdate_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeRideUpdateRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _RideService_SubscribeRideUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubscribeRideUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(RideServiceServer).SubscribeRideUpdate(m, &grpc.GenericServerStream[SubscribeRideUpdateRequest, SubscribeRideUpdateResponse]{ServerStream: stream})
+	if interceptor == nil {
+		return srv.(RideServiceServer).SubscribeRideUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_SubscribeRideUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).SubscribeRideUpdate(ctx, req.(*SubscribeRideUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RideService_SubscribeRideUpdateServer = grpc.ServerStreamingServer[SubscribeRideUpdateResponse]
 
 func _RideService_AcceptRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AcceptRideRequest)
@@ -340,6 +338,10 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RideService_RequestRide_Handler,
 		},
 		{
+			MethodName: "SubscribeRideUpdate",
+			Handler:    _RideService_SubscribeRideUpdate_Handler,
+		},
+		{
 			MethodName: "AcceptRide",
 			Handler:    _RideService_AcceptRide_Handler,
 		},
@@ -360,11 +362,6 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "TrackMultipleRides",
 			Handler:       _RideService_TrackMultipleRides_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SubscribeRideUpdate",
-			Handler:       _RideService_SubscribeRideUpdate_Handler,
 			ServerStreams: true,
 		},
 	},
