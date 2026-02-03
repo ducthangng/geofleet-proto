@@ -250,8 +250,8 @@
         "rideId": {
           "type": "string"
         },
-        "rideStatus": {
-          "$ref": "#/definitions/v1RideStatus"
+        "isActivated": {
+          "type": "boolean"
         },
         "lastUpdated": {
           "type": "string",

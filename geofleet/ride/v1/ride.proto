@@ -108,7 +108,7 @@ message SubscribeRideUpdateRequest {
 
 message SubscribeRideUpdateResponse {
     string ride_id = 1;
-    RideStatus ride_status = 2;
+    bool is_activated = 2;
     google.protobuf.Timestamp last_updated = 3;
 }
 
