@@ -16,7 +16,10 @@ service RideService {
     rpc RequestRide(RequestRideRequest) returns (RequestRideResponse);
 
     // Listen to the dispatcher of the ride_service
-    rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (SubscribeRideUpdateResponse);
+    rpc TriggerRideUpdate(TriggerRideUpdateRequest) returns (TriggerRideUpdateResponse);
+
+    // Listen to the dispatcher of the ride_service
+    rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (stream SubscribeRideUpdateResponse);
 
     // This is when the Driver accepts the ride
     rpc AcceptRide(AcceptRideRequest) returns (AcceptRideResponse);
@@ -99,6 +102,17 @@ message CompleteRideResponse {
     UniversalRideResponse value = 1;
     double duration_in_second = 2;
     double total_travel_distance_m = 3;
+}
+
+message TriggerRideUpdateRequest {
+    string ride_id = 1;
+    string user_id = 2;
+}
+
+message TriggerRideUpdateResponse {
+    string ride_id = 1;
+    bool is_activated = 2;
+    google.protobuf.Timestamp last_updated = 3;
 }
 
 message SubscribeRideUpdateRequest {

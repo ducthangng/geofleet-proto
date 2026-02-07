@@ -284,6 +284,21 @@
         }
       }
     },
+    "v1TriggerRideUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "rideId": {
+          "type": "string"
+        },
+        "isActivated": {
+          "type": "boolean"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1UniversalRideRequest": {
       "type": "object",
       "properties": {
