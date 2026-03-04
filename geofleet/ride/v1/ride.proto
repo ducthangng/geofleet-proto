@@ -122,8 +122,15 @@ message SubscribeRideUpdateRequest {
 
 message SubscribeRideUpdateResponse {
     string ride_id = 1;
-    bool is_activated = 2;
-    google.protobuf.Timestamp last_updated = 3;
+    RideStatusUpdateResponse ride_status = 2;
+    // does not include the final one
+    repeated RideStatusUpdateResponse previous_ride_status = 3;
+    google.protobuf.Timestamp last_updated = 4;
+}
+
+message RideStatusUpdateResponse {
+    RideStatus ride_status = 1;
+    google.protobuf.Timestamp last_updated = 2;
 }
 
 message RequestRideRequest {

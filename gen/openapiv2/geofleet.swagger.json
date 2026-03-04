@@ -236,6 +236,18 @@
       "default": "RIDE_STATUS_UNSPECIFIED",
       "title": "- RIDE_STATUS_UNSPECIFIED: Giá trị mặc định\n - RIDE_STATUS_CREATED: User requested\n - RIDE_STATUS_MATCHING: System pinging drivers\n - RIDE_STATUS_ACCEPTED: Driver accepted\n - RIDE_STATUS_ARRIVED: Driver at pick-up\n - RIDE_STATUS_IN_PROGRESS: In the car\n - RIDE_STATUS_COMPLETED: Arrived destination\n - RIDE_STATUS_CANCELLED: Trip cancelled"
     },
+    "v1RideStatusUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1StartRideResponse": {
       "type": "object",
       "properties": {
@@ -250,8 +262,16 @@
         "rideId": {
           "type": "string"
         },
-        "isActivated": {
-          "type": "boolean"
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatusUpdateResponse"
+        },
+        "previousRideStatus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1RideStatusUpdateResponse"
+          },
+          "title": "does not include the final one"
         },
         "lastUpdated": {
           "type": "string",
