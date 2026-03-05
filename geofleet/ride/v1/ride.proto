@@ -134,7 +134,7 @@ message RideStatusUpdateResponse {
 }
 
 message RequestRideRequest {
-    string user_id = 1;
+    string passenger_id = 1;
 
     geofleet.common.v1.LatLng pickup_point = 2;
     geofleet.common.v1.LatLng dropoff_point = 3;
