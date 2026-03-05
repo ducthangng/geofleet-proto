@@ -105,6 +105,36 @@
         }
       }
     },
+    "v1DriverLocation": {
+      "type": "object",
+      "properties": {
+        "driverId": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/v1UserRole"
+        },
+        "location": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1GetDriverNearbyResponse": {
+      "type": "object",
+      "properties": {
+        "drivers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1DriverLocation"
+          }
+        }
+      }
+    },
     "v1GetUserProfileResponse": {
       "type": "object",
       "properties": {

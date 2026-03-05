@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	TrackingService_UploadLocationHistory_FullMethodName = "/geofleet.tracking.v1.TrackingService/UploadLocationHistory"
+	TrackingService_GetDriverNearby_FullMethodName       = "/geofleet.tracking.v1.TrackingService/GetDriverNearby"
 )
 
 // TrackingServiceClient is the client API for TrackingService service.
@@ -28,6 +29,8 @@ const (
 type TrackingServiceClient interface {
 	// Client streaming: Driver liên tục gửi tọa độ
 	UploadLocationHistory(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadLocationHistoryRequest, UploadLocationHistoryResponse], error)
+	// GetDriverNearby returns a list of driver near by, max 10 drivers
+	GetDriverNearby(ctx context.Context, in *GetDriverNearbyRequest, opts ...grpc.CallOption) (*GetDriverNearbyResponse, error)
 }
 
 type trackingServiceClient struct {
@@ -51,12 +54,24 @@ func (c *trackingServiceClient) UploadLocationHistory(ctx context.Context, opts 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type TrackingService_UploadLocationHistoryClient = grpc.ClientStreamingClient[UploadLocationHistoryRequest, UploadLocationHistoryResponse]
 
+func (c *trackingServiceClient) GetDriverNearby(ctx context.Context, in *GetDriverNearbyRequest, opts ...grpc.CallOption) (*GetDriverNearbyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDriverNearbyResponse)
+	err := c.cc.Invoke(ctx, TrackingService_GetDriverNearby_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TrackingServiceServer is the server API for TrackingService service.
 // All implementations should embed UnimplementedTrackingServiceServer
 // for forward compatibility.
 type TrackingServiceServer interface {
 	// Client streaming: Driver liên tục gửi tọa độ
 	UploadLocationHistory(grpc.ClientStreamingServer[UploadLocationHistoryRequest, UploadLocationHistoryResponse]) error
+	// GetDriverNearby returns a list of driver near by, max 10 drivers
+	GetDriverNearby(context.Context, *GetDriverNearbyRequest) (*GetDriverNearbyResponse, error)
 }
 
 // UnimplementedTrackingServiceServer should be embedded to have
@@ -68,6 +83,9 @@ type UnimplementedTrackingServiceServer struct{}
 
 func (UnimplementedTrackingServiceServer) UploadLocationHistory(grpc.ClientStreamingServer[UploadLocationHistoryRequest, UploadLocationHistoryResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method UploadLocationHistory not implemented")
+}
+func (UnimplementedTrackingServiceServer) GetDriverNearby(context.Context, *GetDriverNearbyRequest) (*GetDriverNearbyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriverNearby not implemented")
 }
 func (UnimplementedTrackingServiceServer) testEmbeddedByValue() {}
 
@@ -96,13 +114,36 @@ func _TrackingService_UploadLocationHistory_Handler(srv interface{}, stream grpc
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type TrackingService_UploadLocationHistoryServer = grpc.ClientStreamingServer[UploadLocationHistoryRequest, UploadLocationHistoryResponse]
 
+func _TrackingService_GetDriverNearby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriverNearbyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrackingServiceServer).GetDriverNearby(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrackingService_GetDriverNearby_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrackingServiceServer).GetDriverNearby(ctx, req.(*GetDriverNearbyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TrackingService_ServiceDesc is the grpc.ServiceDesc for TrackingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TrackingService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "geofleet.tracking.v1.TrackingService",
 	HandlerType: (*TrackingServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetDriverNearby",
+			Handler:    _TrackingService_GetDriverNearby_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadLocationHistory",

@@ -4,16 +4,20 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
-import { file_protoc_gen_openapiv2_options_annotations } from "../../protoc-gen-openapiv2/options/annotations_pb";
+import type { UserRole } from "../../identity/v1/user_pb";
+import { file_identity_v1_user } from "../../identity/v1/user_pb";
 import type { LatLng } from "../../common/v1/common_pb";
 import { file_common_v1_common } from "../../common/v1/common_pb";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../protoc-gen-openapiv2/options/annotations_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file tracking/v1/tracking.proto.
  */
 export const file_tracking_v1_tracking: GenFile = /*@__PURE__*/
-  fileDesc("Chp0cmFja2luZy92MS90cmFja2luZy5wcm90bxIUZ2VvZmxlZXQudHJhY2tpbmcudjEiXwocVXBsb2FkTG9jYXRpb25IaXN0b3J5UmVxdWVzdBIRCglkcml2ZXJfaWQYASABKAkSLAoIbG9jYXRpb24YAiABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nIkYKHVVwbG9hZExvY2F0aW9uSGlzdG9yeVJlc3BvbnNlEgsKA21zZxgBIAEoCRIYChBwb2ludHNfcHJvY2Vzc2VkGAIgASgFMvUBCg9UcmFja2luZ1NlcnZpY2US4QEKFVVwbG9hZExvY2F0aW9uSGlzdG9yeRIyLmdlb2ZsZWV0LnRyYWNraW5nLnYxLlVwbG9hZExvY2F0aW9uSGlzdG9yeVJlcXVlc3QaMy5nZW9mbGVldC50cmFja2luZy52MS5VcGxvYWRMb2NhdGlvbkhpc3RvcnlSZXNwb25zZSJdkkFaEhxTdHJlYW0gdOG7jWEgxJHhu5kgdMOgaSB44bq/GjpOaOG6rW4gbHXhu5NuZyBk4buvIGxp4buHdSBHUFMgbGnDqm4gdOG7pWMgdOG7qyBzaW11bGF0b3IuKAFCgAIKGGNvbS5nZW9mbGVldC50cmFja2luZy52MUINVHJhY2tpbmdQcm90b1ABWkJnaXRodWIuY29tL2R1Y3RoYW5nbmcvZ2VvZmxlZXQtcHJvdG8vZ2VuL2dvL3RyYWNraW5nL3YxO3RyYWNraW5ndjGiAgNHVFiqAhRHZW9mbGVldC5UcmFja2luZy5WMcoCFEdlb2ZsZWV0XFRyYWNraW5nXFYx4gIgR2VvZmxlZXRcVHJhY2tpbmdcVjFcR1BCTWV0YWRhdGHqAhZHZW9mbGVldDo6VHJhY2tpbmc6OlYxkkEeEhwKFUdlb2ZsZWV0IFRyYWNraW5nIEFQSTIDMS4wYgZwcm90bzM", [file_protoc_gen_openapiv2_options_annotations, file_common_v1_common]);
+  fileDesc("Chp0cmFja2luZy92MS90cmFja2luZy5wcm90bxIUZ2VvZmxlZXQudHJhY2tpbmcudjEiXwocVXBsb2FkTG9jYXRpb25IaXN0b3J5UmVxdWVzdBIRCglkcml2ZXJfaWQYASABKAkSLAoIbG9jYXRpb24YAiABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nIkYKHVVwbG9hZExvY2F0aW9uSGlzdG9yeVJlc3BvbnNlEgsKA21zZxgBIAEoCRIYChBwb2ludHNfcHJvY2Vzc2VkGAIgASgFIkYKFkdldERyaXZlck5lYXJieVJlcXVlc3QSLAoIbG9jYXRpb24YASABKAsyGi5nZW9mbGVldC5jb21tb24udjEuTGF0TG5nIlAKF0dldERyaXZlck5lYXJieVJlc3BvbnNlEjUKB2RyaXZlcnMYASADKAsyJC5nZW9mbGVldC50cmFja2luZy52MS5Ecml2ZXJMb2NhdGlvbiKvAQoORHJpdmVyTG9jYXRpb24SEQoJZHJpdmVyX2lkGAEgASgJEiwKBHJvbGUYAiABKA4yHi5nZW9mbGVldC5pZGVudGl0eS52MS5Vc2VyUm9sZRIsCghsb2NhdGlvbhgDIAEoCzIaLmdlb2ZsZWV0LmNvbW1vbi52MS5MYXRMbmcSLgoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAy5QIKD1RyYWNraW5nU2VydmljZRLhAQoVVXBsb2FkTG9jYXRpb25IaXN0b3J5EjIuZ2VvZmxlZXQudHJhY2tpbmcudjEuVXBsb2FkTG9jYXRpb25IaXN0b3J5UmVxdWVzdBozLmdlb2ZsZWV0LnRyYWNraW5nLnYxLlVwbG9hZExvY2F0aW9uSGlzdG9yeVJlc3BvbnNlIl2SQVoSHFN0cmVhbSB04buNYSDEkeG7mSB0w6BpIHjhur8aOk5o4bqtbiBsdeG7k25nIGThu68gbGnhu4d1IEdQUyBsacOqbiB04bulYyB04burIHNpbXVsYXRvci4oARJuCg9HZXREcml2ZXJOZWFyYnkSLC5nZW9mbGVldC50cmFja2luZy52MS5HZXREcml2ZXJOZWFyYnlSZXF1ZXN0Gi0uZ2VvZmxlZXQudHJhY2tpbmcudjEuR2V0RHJpdmVyTmVhcmJ5UmVzcG9uc2VCgAIKGGNvbS5nZW9mbGVldC50cmFja2luZy52MUINVHJhY2tpbmdQcm90b1ABWkJnaXRodWIuY29tL2R1Y3RoYW5nbmcvZ2VvZmxlZXQtcHJvdG8vZ2VuL2dvL3RyYWNraW5nL3YxO3RyYWNraW5ndjGiAgNHVFiqAhRHZW9mbGVldC5UcmFja2luZy5WMcoCFEdlb2ZsZWV0XFRyYWNraW5nXFYx4gIgR2VvZmxlZXRcVHJhY2tpbmdcVjFcR1BCTWV0YWRhdGHqAhZHZW9mbGVldDo6VHJhY2tpbmc6OlYxkkEeEhwKFUdlb2ZsZWV0IFRyYWNraW5nIEFQSTIDMS4wYgZwcm90bzM", [file_identity_v1_user, file_common_v1_common, file_google_protobuf_timestamp, file_protoc_gen_openapiv2_options_annotations]);
 
 /**
  * @generated from message geofleet.tracking.v1.UploadLocationHistoryRequest
@@ -60,6 +64,72 @@ export const UploadLocationHistoryResponseSchema: GenMessage<UploadLocationHisto
   messageDesc(file_tracking_v1_tracking, 1);
 
 /**
+ * @generated from message geofleet.tracking.v1.GetDriverNearbyRequest
+ */
+export type GetDriverNearbyRequest = Message<"geofleet.tracking.v1.GetDriverNearbyRequest"> & {
+  /**
+   * @generated from field: geofleet.common.v1.LatLng location = 1;
+   */
+  location?: LatLng;
+};
+
+/**
+ * Describes the message geofleet.tracking.v1.GetDriverNearbyRequest.
+ * Use `create(GetDriverNearbyRequestSchema)` to create a new message.
+ */
+export const GetDriverNearbyRequestSchema: GenMessage<GetDriverNearbyRequest> = /*@__PURE__*/
+  messageDesc(file_tracking_v1_tracking, 2);
+
+/**
+ * @generated from message geofleet.tracking.v1.GetDriverNearbyResponse
+ */
+export type GetDriverNearbyResponse = Message<"geofleet.tracking.v1.GetDriverNearbyResponse"> & {
+  /**
+   * @generated from field: repeated geofleet.tracking.v1.DriverLocation drivers = 1;
+   */
+  drivers: DriverLocation[];
+};
+
+/**
+ * Describes the message geofleet.tracking.v1.GetDriverNearbyResponse.
+ * Use `create(GetDriverNearbyResponseSchema)` to create a new message.
+ */
+export const GetDriverNearbyResponseSchema: GenMessage<GetDriverNearbyResponse> = /*@__PURE__*/
+  messageDesc(file_tracking_v1_tracking, 3);
+
+/**
+ * @generated from message geofleet.tracking.v1.DriverLocation
+ */
+export type DriverLocation = Message<"geofleet.tracking.v1.DriverLocation"> & {
+  /**
+   * @generated from field: string driver_id = 1;
+   */
+  driverId: string;
+
+  /**
+   * @generated from field: geofleet.identity.v1.UserRole role = 2;
+   */
+  role: UserRole;
+
+  /**
+   * @generated from field: geofleet.common.v1.LatLng location = 3;
+   */
+  location?: LatLng;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 4;
+   */
+  updatedAt?: Timestamp;
+};
+
+/**
+ * Describes the message geofleet.tracking.v1.DriverLocation.
+ * Use `create(DriverLocationSchema)` to create a new message.
+ */
+export const DriverLocationSchema: GenMessage<DriverLocation> = /*@__PURE__*/
+  messageDesc(file_tracking_v1_tracking, 4);
+
+/**
  * @generated from service geofleet.tracking.v1.TrackingService
  */
 export const TrackingService: GenService<{
@@ -78,6 +148,16 @@ export const TrackingService: GenService<{
     methodKind: "client_streaming";
     input: typeof UploadLocationHistoryRequestSchema;
     output: typeof UploadLocationHistoryResponseSchema;
+  },
+  /**
+   * GetDriverNearby returns a list of driver near by, max 10 drivers
+   *
+   * @generated from rpc geofleet.tracking.v1.TrackingService.GetDriverNearby
+   */
+  getDriverNearby: {
+    methodKind: "unary";
+    input: typeof GetDriverNearbyRequestSchema;
+    output: typeof GetDriverNearbyResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tracking_v1_tracking, 0);

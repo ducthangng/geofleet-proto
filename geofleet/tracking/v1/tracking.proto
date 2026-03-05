@@ -1,12 +1,13 @@
 syntax = "proto3";
 
 package geofleet.tracking.v1;
+import "identity/v1/user.proto";
+import "common/v1/common.proto"; // Import LatLng
+import "google/protobuf/timestamp.proto";
 option go_package = "github.com/ducthangng/geofleet-proto/gen/go/tracking/v1;trackingv1";
 
 // Import annotations OpenAPI
 import "protoc-gen-openapiv2/options/annotations.proto";
-import "common/v1/common.proto";
-// import "google/api/annotations.proto";
 
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -30,7 +31,9 @@ service TrackingService {
             description: "Nhận luồng dữ liệu GPS liên tục từ simulator.";
         };
     };
-   
+
+    // GetDriverNearby returns a list of driver near by, max 10 drivers
+    rpc GetDriverNearby(GetDriverNearbyRequest) returns (GetDriverNearbyResponse);
 }
 
 message UploadLocationHistoryRequest {
@@ -41,4 +44,19 @@ message UploadLocationHistoryRequest {
 message UploadLocationHistoryResponse {
     string msg = 1;
     int32 points_processed = 2;
+}
+
+message GetDriverNearbyRequest {
+    geofleet.common.v1.LatLng location = 1;
+}
+
+message GetDriverNearbyResponse {
+    repeated DriverLocation drivers = 1;
+}
+
+message DriverLocation {
+    string driver_id = 1;
+    geofleet.identity.v1.UserRole role = 2;
+    geofleet.common.v1.LatLng location = 3;
+    google.protobuf.Timestamp updated_at = 4;
 }
