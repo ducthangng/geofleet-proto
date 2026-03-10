@@ -21,6 +21,9 @@ service RideService {
     // Listen to the dispatcher of the ride_service
     rpc SubscribeRideUpdate(SubscribeRideUpdateRequest) returns (stream SubscribeRideUpdateResponse);
 
+    // Returns a stream of response to driver.
+    rpc GetAwaitingRide(GetAwaitingRideRequest) returns (stream GetAwaitingRideResponse);
+
     // change when a user cancel the
     rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse);
 
@@ -73,7 +76,7 @@ message AcceptRideRequest {
 }
 
 message AcceptRideResponse {
-    UniversalRideResponse value = 1;
+    bool ride_granted = 1;
 }
 
 message StartRideRequest {
@@ -182,4 +185,15 @@ message CancelSubscriptionRequest {
 
 message CancelSubscriptionResponse {
     
+}
+
+
+message GetAwaitingRideRequest {
+    string driver_id = 1;
+    geofleet.common.v1.LatLng current_location = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message GetAwaitingRideResponse {
+    repeated RequestRideRequest awaiting_rides = 1;
 }

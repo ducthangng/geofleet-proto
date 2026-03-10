@@ -23,6 +23,8 @@ const (
 	RideService_RequestRide_FullMethodName         = "/geofleet.ride.v1.RideService/RequestRide"
 	RideService_TriggerRideUpdate_FullMethodName   = "/geofleet.ride.v1.RideService/TriggerRideUpdate"
 	RideService_SubscribeRideUpdate_FullMethodName = "/geofleet.ride.v1.RideService/SubscribeRideUpdate"
+	RideService_GetAwaitingRide_FullMethodName     = "/geofleet.ride.v1.RideService/GetAwaitingRide"
+	RideService_CancelSubscription_FullMethodName  = "/geofleet.ride.v1.RideService/CancelSubscription"
 	RideService_AcceptRide_FullMethodName          = "/geofleet.ride.v1.RideService/AcceptRide"
 	RideService_StartRide_FullMethodName           = "/geofleet.ride.v1.RideService/StartRide"
 	RideService_CancelRide_FullMethodName          = "/geofleet.ride.v1.RideService/CancelRide"
@@ -43,6 +45,10 @@ type RideServiceClient interface {
 	TriggerRideUpdate(ctx context.Context, in *TriggerRideUpdateRequest, opts ...grpc.CallOption) (*TriggerRideUpdateResponse, error)
 	// Listen to the dispatcher of the ride_service
 	SubscribeRideUpdate(ctx context.Context, in *SubscribeRideUpdateRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SubscribeRideUpdateResponse], error)
+	// Returns a stream of response to driver.
+	GetAwaitingRide(ctx context.Context, in *GetAwaitingRideRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetAwaitingRideResponse], error)
+	// change when a user cancel the
+	CancelSubscription(ctx context.Context, in *CancelSubscriptionRequest, opts ...grpc.CallOption) (*CancelSubscriptionResponse, error)
 	// This is when the Driver accepts the ride
 	AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error)
 	// This is when the Driver start the ride
@@ -119,6 +125,35 @@ func (c *rideServiceClient) SubscribeRideUpdate(ctx context.Context, in *Subscri
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_SubscribeRideUpdateClient = grpc.ServerStreamingClient[SubscribeRideUpdateResponse]
 
+func (c *rideServiceClient) GetAwaitingRide(ctx context.Context, in *GetAwaitingRideRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetAwaitingRideResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &RideService_ServiceDesc.Streams[2], RideService_GetAwaitingRide_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[GetAwaitingRideRequest, GetAwaitingRideResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type RideService_GetAwaitingRideClient = grpc.ServerStreamingClient[GetAwaitingRideResponse]
+
+func (c *rideServiceClient) CancelSubscription(ctx context.Context, in *CancelSubscriptionRequest, opts ...grpc.CallOption) (*CancelSubscriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelSubscriptionResponse)
+	err := c.cc.Invoke(ctx, RideService_CancelSubscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *rideServiceClient) AcceptRide(ctx context.Context, in *AcceptRideRequest, opts ...grpc.CallOption) (*AcceptRideResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AcceptRideResponse)
@@ -173,6 +208,10 @@ type RideServiceServer interface {
 	TriggerRideUpdate(context.Context, *TriggerRideUpdateRequest) (*TriggerRideUpdateResponse, error)
 	// Listen to the dispatcher of the ride_service
 	SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error
+	// Returns a stream of response to driver.
+	GetAwaitingRide(*GetAwaitingRideRequest, grpc.ServerStreamingServer[GetAwaitingRideResponse]) error
+	// change when a user cancel the
+	CancelSubscription(context.Context, *CancelSubscriptionRequest) (*CancelSubscriptionResponse, error)
 	// This is when the Driver accepts the ride
 	AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error)
 	// This is when the Driver start the ride
@@ -201,6 +240,12 @@ func (UnimplementedRideServiceServer) TriggerRideUpdate(context.Context, *Trigge
 }
 func (UnimplementedRideServiceServer) SubscribeRideUpdate(*SubscribeRideUpdateRequest, grpc.ServerStreamingServer[SubscribeRideUpdateResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method SubscribeRideUpdate not implemented")
+}
+func (UnimplementedRideServiceServer) GetAwaitingRide(*GetAwaitingRideRequest, grpc.ServerStreamingServer[GetAwaitingRideResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method GetAwaitingRide not implemented")
+}
+func (UnimplementedRideServiceServer) CancelSubscription(context.Context, *CancelSubscriptionRequest) (*CancelSubscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelSubscription not implemented")
 }
 func (UnimplementedRideServiceServer) AcceptRide(context.Context, *AcceptRideRequest) (*AcceptRideResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptRide not implemented")
@@ -292,6 +337,35 @@ func _RideService_SubscribeRideUpdate_Handler(srv interface{}, stream grpc.Serve
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RideService_SubscribeRideUpdateServer = grpc.ServerStreamingServer[SubscribeRideUpdateResponse]
 
+func _RideService_GetAwaitingRide_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetAwaitingRideRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RideServiceServer).GetAwaitingRide(m, &grpc.GenericServerStream[GetAwaitingRideRequest, GetAwaitingRideResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type RideService_GetAwaitingRideServer = grpc.ServerStreamingServer[GetAwaitingRideResponse]
+
+func _RideService_CancelSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RideServiceServer).CancelSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RideService_CancelSubscription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RideServiceServer).CancelSubscription(ctx, req.(*CancelSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RideService_AcceptRide_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AcceptRideRequest)
 	if err := dec(in); err != nil {
@@ -380,6 +454,10 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RideService_TriggerRideUpdate_Handler,
 		},
 		{
+			MethodName: "CancelSubscription",
+			Handler:    _RideService_CancelSubscription_Handler,
+		},
+		{
 			MethodName: "AcceptRide",
 			Handler:    _RideService_AcceptRide_Handler,
 		},
@@ -405,6 +483,11 @@ var RideService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "SubscribeRideUpdate",
 			Handler:       _RideService_SubscribeRideUpdate_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetAwaitingRide",
+			Handler:       _RideService_GetAwaitingRide_Handler,
 			ServerStreams: true,
 		},
 	},

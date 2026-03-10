@@ -54,8 +54,8 @@
     "v1AcceptRideResponse": {
       "type": "object",
       "properties": {
-        "value": {
-          "$ref": "#/definitions/v1UniversalRideResponse"
+        "rideGranted": {
+          "type": "boolean"
         }
       }
     },
@@ -72,6 +72,9 @@
           "type": "string"
         }
       }
+    },
+    "v1CancelSubscriptionResponse": {
+      "type": "object"
     },
     "v1CheckDuplicatedPhoneResponse": {
       "type": "object",
@@ -120,6 +123,18 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "v1GetAwaitingRideResponse": {
+      "type": "object",
+      "properties": {
+        "awaitingRides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1RequestRideRequest"
+          }
         }
       }
     },
@@ -216,6 +231,33 @@
         "PAYMENT_METHOD_CARD"
       ],
       "default": "PAYMENT_METHOD_UNSPECIFIED"
+    },
+    "v1RequestRideRequest": {
+      "type": "object",
+      "properties": {
+        "passengerId": {
+          "type": "string"
+        },
+        "pickupPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "dropoffPoint": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/v1LatLng"
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/v1PaymentMethod"
+        },
+        "rideStatus": {
+          "$ref": "#/definitions/v1RideStatus"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "v1RequestRideResponse": {
       "type": "object",
